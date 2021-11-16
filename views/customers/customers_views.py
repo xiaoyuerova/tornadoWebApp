@@ -46,6 +46,7 @@ class LoginHandle(tornado.web.RequestHandler):
             "code":code
         """
     customers_id = 0
+
     @property
     def db(self):
         return self.application.db
@@ -62,7 +63,7 @@ class LoginHandle(tornado.web.RequestHandler):
         return 0
 
     def get(self):
-        self.render("login.html")
+        pass
 
     def post(self):
         try:
@@ -118,8 +119,6 @@ class SubmitHandle(tornado.web.RequestHandler):
             order_id = self.get_argument('orderId')
 
             # 存进表chooses
-
-            CaterHandle.refresh_orders()
 
         except Exception as e:
             # 获取⼊参失败时，抛出错误码及错误信息

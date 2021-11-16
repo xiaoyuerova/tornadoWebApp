@@ -57,7 +57,3 @@ class CaterHandle(tornado.web.RequestHandler):
 
     def post(self):
         pass
-
-    def refresh_orders(self):
-        print('refresh_orders')
-        pass
