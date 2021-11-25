@@ -7,10 +7,11 @@ import os
 import sys
 from tornado.options import define, options
 from common.url_router import include, url_wrapper
+from views.login.login_views import LoginHandler
 
 from common.models import init_db
 from sqlalchemy.orm import scoped_session, sessionmaker
-from conf.base import BaseDB, engine
+from conf.base import BaseDB, engine, SERVER_HEADER
 
 
 class Application(tornado.web.Application):
@@ -23,6 +24,7 @@ class Application(tornado.web.Application):
             # (r"/cashiers/", include('views.cashiers.cashiers_urls')),
             # (r"/managers/", include('views.managers.managers_urls'))
         ])
+        handles.append((r"/", LoginHandler))
         settings = dict(
             debug=True,
             static_path=os.path.join(os.path.dirname(__file__), "static"),
@@ -39,6 +41,7 @@ class Application(tornado.web.Application):
 
 if __name__ == '__main__':
     print("Tornado server is ready for service\r")
+    print("run in " + SERVER_HEADER)
     tornado.options.parse_command_line()
     Application().listen(8000, xheaders=True)
     tornado.ioloop.IOLoop.instance().start()

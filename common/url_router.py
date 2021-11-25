@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 from importlib import import_module
 
-
 def include(module):
     res = import_module(module)
     urls = getattr(res, 'urls', res)
