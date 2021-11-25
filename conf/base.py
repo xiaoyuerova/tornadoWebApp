@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('mysql://root:wxt123@localhost:3306/orderingSystem?charset=utf8', encoding="utf8", echo=False)
+engine = create_engine('mysql+pymysql://root:wxt123@localhost:3306/orderingSystem?charset=utf8', encoding="utf8", echo=False)
 BaseDB = declarative_base()
 
 # # 服务器端 IP+Port，请修改对应的IP
