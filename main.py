@@ -22,7 +22,7 @@ class Application(tornado.web.Application):
             (r"/customers/", include('views.customers.customers_urls')),
             (r"/cateringStaffs/", include('views.cateringStaffs.cateringStaffs_urls')),
             # (r"/cashiers/", include('views.cashiers.cashiers_urls')),
-            # (r"/managers/", include('views.managers.managers_urls'))
+            (r"/managers/", include('views.managers.managers_urls'))
         ])
         handles.append((r"/", LoginHandler))
         settings = dict(

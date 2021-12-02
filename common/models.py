@@ -55,7 +55,7 @@ class Dishes(BaseDB):
 
     def __init__(self, style, name, price):
         self.style = style
-        self.style = name
+        self.name = name
         self.price = price
 
     def to_dict(self):
