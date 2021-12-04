@@ -36,11 +36,12 @@
     height: 50px;
 }
 .title{
-    /*子元素占父元素剩余空间的比例*/
+    /*子元素占父元素剩余空间的比例,1就是把剩下的全部占满*/
     flex-grow: 1;
     height: 50px;
     font-size: 18px;
 }
+/*span可以继承，a不能继承，所以重新写*/
 .city>a{
     color: #fff;
     font-size: 12px;
