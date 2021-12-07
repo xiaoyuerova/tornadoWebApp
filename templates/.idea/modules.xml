@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Vue餐饮点餐系统前台/.idea/freshfood.iml" filepath="$PROJECT_DIR$/../Vue餐饮点餐系统前台/.idea/freshfood.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/templates.iml" filepath="$PROJECT_DIR$/.idea/templates.iml" />
+      <module fileurl="file://D:/qq数据/747934484/FileRecv/点餐系统/.idea/点餐系统.iml" filepath="D:/qq数据/747934484/FileRecv/点餐系统/.idea/点餐系统.iml" />
+    </modules>
+  </component>
+</project>
