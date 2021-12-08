@@ -5,10 +5,10 @@ from tornado.escape import json_decode
 
 import logging
 from logging.handlers import TimedRotatingFileHandler
-from datetime import datetime
 
 from common.commons import (
     http_response,
+    get_dates
 )
 # 从配置⽂件中导⼊错误码
 from conf.base import (
@@ -16,12 +16,14 @@ from conf.base import (
 )
 from common.models import (
     Dishes,
-
+    Customers,
+    Chooses,
+    Orders
 )
 
 # Configure logging,生成日志文件
 logFilePath = "log/managers/managers.log"  # 日志保存地址
-logger = logging.getLogger("manager")
+logger = logging.getLogger("Managers")
 logger.setLevel(logging.DEBUG)
 # 保留⽅式（这⾥设定按天保存，保留 30 天的 log 记录）
 handler = TimedRotatingFileHandler(
@@ -34,6 +36,51 @@ formatter = logging.Formatter('%(asctime)s\%(filename)s[line:%(lineno)d]%(leveln
 handler.suffix = "%Y%m%d"
 handler.setFormatter(formatter)
 logger.addHandler(handler)
+
+
+class OrderHandler(tornado.web.RequestHandler):
+    """
+        handle /managers/order request
+    """
+
+    @property
+    def db(self):
+        return self.application.db
+
+    def data_received(self, chunk: bytes) -> Optional[Awaitable[None]]:
+        pass
+
+    def get(self):
+        try:
+            # 获取⼊参
+            start_date = self.get_argument('startDate')
+            end_date = self.get_argument('endDate')
+
+            try:
+                dates = get_dates(start_date, end_date)
+                order_list = []
+                for date in dates:
+                    date = date.strptime("%Y-%m-%d")
+                    for order_ob in self.db.query(Orders).filter(Orders.date == date).all():
+                        order_list.append(order_ob.to_dict())
+                date = str(order_list)
+
+                http_response(self, date, '0')
+
+            except Exception as e:
+                self.db.rollback()
+                http_response(self, f"ERROR： {e}", '')
+                print(f"ERROR： {e}")
+            finally:
+                self.db.close()
+
+        except Exception as e:
+            # 获取⼊参失败时，抛出错误码及错误信息
+            http_response(self, ERROR_CODE['4001'], '4001')
+            print(f"ERROR： {e}")
+
+    def post(self, *args, **kwargs):
+        pass
 
 
 class ShowHandler(tornado.web.RequestHandler):
@@ -81,12 +128,12 @@ class AddHandler(tornado.web.RequestHandler):
             style = self.get_argument('style')
             name = self.get_argument('name')
             price = self.get_argument('price')
-            specialPrice = self.get_argument('specialPrice')
+            special_price = self.get_argument('specialPrice')
             quantity = self.get_argument('quantity')
 
             try:
                 dish = Dishes(style, name, price)
-                dish.specialPrice = specialPrice
+                dish.specialPrice = special_price
                 dish.quantity = quantity
                 self.db.add(dish)
                 self.db.commit()
@@ -129,7 +176,7 @@ class ModifyHandler(tornado.web.RequestHandler):
             style = self.get_argument('style')
             name = self.get_argument('name')
             price = self.get_argument('price')
-            specialPrice = self.get_argument('specialPrice')
+            special_price = self.get_argument('specialPrice')
             quantity = self.get_argument('quantity')
 
             try:
@@ -144,8 +191,8 @@ class ModifyHandler(tornado.web.RequestHandler):
                     self.db.query(Dishes).filter(Dishes.id == id_).update({Dishes.name: name})
                 if price:
                     self.db.query(Dishes).filter(Dishes.id == id_).update({Dishes.price: price})
-                if specialPrice:
-                    self.db.query(Dishes).filter(Dishes.id == id_).update({Dishes.specialPrice: specialPrice})
+                if special_price:
+                    self.db.query(Dishes).filter(Dishes.id == id_).update({Dishes.specialPrice: special_price})
                 if quantity:
                     self.db.query(Dishes).filter(Dishes.id == id_).update({Dishes.quantity: quantity})
                 self.db.commit()
@@ -185,7 +232,7 @@ class DeleteHandler(tornado.web.RequestHandler):
             id_ = self.get_argument('id')
 
             try:
-                ex = self.db.query(Dishes).filter(Dishes.id == id).first()
+                ex = self.db.query(Dishes).filter(Dishes.id == id_).first()
                 self.db.delete(ex)
                 self.db.commit()
                 http_response(self, ERROR_CODE['0'], '0')

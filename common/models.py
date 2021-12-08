@@ -6,7 +6,8 @@ from sqlalchemy import (
     Float,
     Integer,
     String,
-    DateTime,
+    Date,
+    Time,
     Boolean,
     ForeignKey
 )
@@ -26,14 +27,16 @@ class Customers(BaseDB):
     # 定义表结构
     id = Column(Integer, primary_key=True)
     tableId = Column(Integer, nullable=False, index=True)
-    data = Column(DateTime, nullable=False, index=True)
+    date = Column(Date, nullable=False, index=True)
+    time = Column(Time, nullable=False, index=True)
     phoneNumber = Column(String(20), nullable=True)
     identify = Column(Integer, nullable=True)
     settlement = Column(Boolean, nullable=False)
 
     def __init__(self, tableId):
         self.tableId = tableId
-        self.data = datetime.now()
+        self.date = datetime.now().date()
+        self.time = datetime.now().time()
         self.settlement = False
 
     def to_dict(self):
@@ -45,7 +48,7 @@ class Dishes(BaseDB):
     __tablename__ = "dishes"
     # 定义表结构
     id = Column(Integer, primary_key=True, autoincrement=True)
-    style = Column(Integer, nullable=False)
+    style = Column(Integer, nullable=False)                 # 0：套餐；1：主餐；2：小吃；3：饮品
     name = Column(String(50), nullable=False)
     description = Column(String(200), nullable=True)
     picture = Column(String(400), nullable=True)
@@ -78,37 +81,25 @@ class Chooses(BaseDB):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
-def get_id(customer_id):
-    # 这里要改，别忘了！！！
-    # 这里要改，别忘了！！！
-    # 这里要改，别忘了！！！
-    oder_id = [customer_id]
-    return ''.join(oder_id)
-
-
-def get_total_price(dishes):
-    # 这里要改，别忘了！！！
-    # 这里要改，别忘了！！！
-    # 这里要改，别忘了！！！
-    return 10
-
-
 class Orders(BaseDB):
     # table for orders
     __tablename__ = "orders"
     # 定义表结构
     id = Column(String(20), primary_key=True)
     customerId = Column(Integer, ForeignKey("customers.id"), nullable=False)
+    date = Column(Date, nullable=False, index=True)
+    time = Column(Time, nullable=False, index=True)
     dishes = Column(String(200), nullable=False)
     totalPrice = Column(Float, nullable=True)
     discount = Column(Float, nullable=True)
     state = Column(Integer, nullable=True)
 
-    def __init__(self, customer_id, dishes):
-        self.id = get_id(customer_id)
+    def __init__(self, order_id, customer_id, dishes):
+        self.id = order_id
         self.customerId = customer_id
         self.dishes = dishes
-        self.totalPrice = get_total_price(dishes)
+        self.date = datetime.now().date()
+        self.time = datetime.now().time()
         self.state = 0
 
     def to_dict(self):

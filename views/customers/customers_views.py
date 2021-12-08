@@ -1,6 +1,7 @@
 from typing import Optional, Awaitable
 
 import tornado.web
+import tornado
 from tornado.escape import json_decode
 
 import logging
@@ -16,9 +17,10 @@ from conf.base import (
 )
 from common.models import (
     Customers,
-
+    Orders,
+    Dishes,
+    Chooses
 )
-from views.cateringStaffs.cateringStaffs_views import CaterHandle
 
 # Configure logging,生成日志文件
 logFilePath = "log/customers/customer.log"  # 日志保存地址
@@ -41,10 +43,7 @@ class LoginHandle(tornado.web.RequestHandler):
     """
         handle /customers/login request
         :param tableId: 顾客通过扫码识别到的桌号
-        response:
-            "data":{type1:{},type2:{}}  对象转成的字典,以type为key区分并访问每一行
-            "code":code
-        """
+    """
     customers_id = 0
 
     @property
@@ -56,8 +55,9 @@ class LoginHandle(tornado.web.RequestHandler):
         pass
 
     def query_customer(self, table_id):
-        # 根据桌号查看该桌是否有未结算订单，有返回已存在customer.id，没有返回0
-        for ex_c in self.db.query(Customers).filter_by(tableId=table_id):
+        # 根据桌号查看当天该桌是否有未结算订单，有返回已存在customer.id，没有返回0
+        date = datetime.now().date()
+        for ex_c in self.db.query(Customers).filter(Customers.date == date, Customers.tableId == table_id).all():
             if not ex_c.settlement:
                 return ex_c.id
         return 0
@@ -68,17 +68,22 @@ class LoginHandle(tornado.web.RequestHandler):
     def post(self):
         try:
             # 获取⼊参
-            tableId = self.get_argument('tableId')
+            table_id = self.get_argument('tableId')
 
             try:
-                self.render('orderIndex.html')
-                self.customers_id = self.query_customer(tableId)
+                self.customers_id = self.query_customer(table_id)
 
+                # tornado 默认是异步执行‘write()’
                 if not self.customers_id:
-                    self.db.add(Customers(tableId))
+                    self.db.add(Customers(table_id))
                     self.db.commit()
-                    self.customers_id = self.query_customer(tableId)
-                    print('save successful')
+                    self.customers_id = self.query_customer(table_id)
+
+                # 返回顾客id
+                data = {"customerId": self.customers_id}
+                http_response(self, data, '0')
+                self.render('orderIndex.html')
+                print('customer login successful')
 
             except Exception as e:
                 self.db.rollback()
@@ -92,15 +97,44 @@ class LoginHandle(tornado.web.RequestHandler):
             print(f"ERROR： {e}")
 
 
+def set_two_num(num):
+    result = ''
+    if num >= 10:
+        result = result + str(num)
+    else:
+        result = result + '0' + str(num)
+    return result
+
+
+def set_id(c_id):
+    id_ = c_id % 10000
+    if id_ < 10:
+        result = '000' + str(id_)
+    elif id_ < 100:
+        result = '00' + str(id_)
+    elif id_ < 1000:
+        result = '0' + str(id_)
+    else:
+        result = '' + str(id_)
+    return result
+
+
+def get_id(customer_id):
+    # 根据用户id生成订单编号
+    date = datetime.now()
+    order_id = '' + str(date.year) + set_two_num(date.month) + set_two_num(date.month) + set_two_num(date.day) \
+               + set_two_num(date.hour) + set_two_num(date.minute) + set_two_num(date.second)
+    order_id = order_id + set_id(customer_id)
+    return order_id
+
+
 class SubmitHandle(tornado.web.RequestHandler):
     """
-        handle /customers/submit request
-        :param customer_id: 顾客编号
-        :param order_id: 顾客提交的订单编号
-        response:
-            "data":{type1:{},type2:{}}  对象转成的字典,以type为key区分并访问每一行
-            "code":code
-        """
+    handle /customers/submit request
+    :param customer_id: 顾客编号
+    :param dishes: 顾客点的菜品编号列表
+    """
+
     @property
     def db(self):
         return self.application.db
@@ -116,9 +150,84 @@ class SubmitHandle(tornado.web.RequestHandler):
         try:
             # 获取⼊参
             customer_id = self.get_argument('customerId')
-            order_id = self.get_argument('orderId')
+            dishes = self.get_argument('dishes')
 
-            # 存进表chooses
+            try:
+                customer_id = eval(customer_id)
+                dishes = eval(dishes)
+                order_id = get_id(customer_id)
+                order = Orders(order_id, customer_id, dishes)
+                # 计算总价
+                total_price = 0
+                for dishes_id in dishes:
+                    ex_d = self.db.query(Dishes).filter(Dishes.id == dishes_id).first()
+                    total_price += ex_d.price
+                order.totalPrice = total_price
+                self.db.add(order)
+                self.db.commit()
+                # 返回订单编号
+                http_response(self, order.id, '0')
+
+            except Exception as e:
+                self.db.rollback()
+                print(f"ERROR： {e}")
+            finally:
+                self.db.close()
+
+        except Exception as e:
+            # 获取⼊参失败时，抛出错误码及错误信息
+            http_response(self, ERROR_CODE['2001'], '2001')
+            print(f"ERROR： {e}")
+
+
+class OrdersHandler(tornado.web.RequestHandler):
+    """
+    顾客更新订单状态
+    handle /customers/orders request
+        :param customerId: 顾客id
+    """
+
+    @property
+    def db(self):
+        return self.application.db
+
+    def data_received(self, chunk: bytes) -> Optional[Awaitable[None]]:
+        # 这是父类要求必须定义的，有什么用，没查过
+        pass
+
+    def query_customer(self, table_id):
+        # 根据桌号查看当天该桌是否有未结算订单，有返回已存在customer.id，没有返回0
+        date = datetime.now().date()
+        for ex_c in self.db.query(Customers).filter(Customers.date == date, Customers.tableId == table_id).all():
+            if not ex_c.settlement:
+                return ex_c.id
+        return 0
+
+    def get(self):
+        pass
+
+    def post(self):
+        try:
+            # 获取⼊参
+            customer_id = self.get_argument('customerId')
+
+            try:
+                choose = self.db.query(Chooses).filter(Chooses.customerId == customer_id).first()
+                order_ids = eval(choose.orderIds)
+                orders = []
+                for order_id in order_ids:
+                    order = self.db.query(Orders).filter(Orders.id == order_id).first()
+                    orders.append(order.to_dict())
+
+                # 返回顾客id
+                data = {"customerId": orders}
+                http_response(self, data, '0')
+
+            except Exception as e:
+                self.db.rollback()
+                print(f"ERROR： {e}")
+            finally:
+                self.db.close()
 
         except Exception as e:
             # 获取⼊参失败时，抛出错误码及错误信息

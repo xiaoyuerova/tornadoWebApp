@@ -1,9 +1,13 @@
 from __future__ import unicode_literals
 
 from .cateringStaffs_views import (
-    CaterHandle
+    OrderHandle,
+    OperateHandler,
+    CompleteHandler
 )
 
 urls = [
-    (r'index', CaterHandle)
+    (r'order', OrderHandle),
+    (r'operate', OperateHandler),
+    (r'complete', CompleteHandler)
 ]

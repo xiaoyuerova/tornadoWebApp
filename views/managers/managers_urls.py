@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from .managers_views import (
+    OrderHandler,
     ShowHandler,
     AddHandler,
     ModifyHandler,
@@ -7,6 +8,7 @@ from .managers_views import (
 )
 
 urls = [
+    (r'order', OrderHandler),
     (r'show', ShowHandler),
     (r'add', AddHandler),
     (r'modify', ModifyHandler),
