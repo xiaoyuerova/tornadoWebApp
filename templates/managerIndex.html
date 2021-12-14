@@ -27,8 +27,9 @@
        </div>
 
      </li>
-       <li>
-           <el-row>
+
+   </ul>
+            <el-row>
                <el-col :span="4">
                    <el-menu
       default-active="2"
@@ -45,10 +46,10 @@
           <span>销售管理</span>
         </template>
         <el-submenu index="2">
-            <template slot="title">查看订单</template>
+            <template slot="title"><a href="showOrder.html" target="mainframe">查看订单</a></template>
         </el-submenu>
           <el-submenu index="3">
-            <template slot="title">数据统计</template>
+            <template slot="title"><a href="shujvtongji.html" target="mainframe">数据统计</a></template>
         </el-submenu>
 
       </el-submenu>
@@ -57,13 +58,13 @@
           <span>菜单管理</span>
         </template>
         <el-submenu index="5">
-            <template slot="title">添加</template>
+            <template slot="title"><a href="add.html" target="mainframe">添加</a></template>
         </el-submenu>
          <el-submenu index="6">
-            <template slot="title">修改</template>
+            <template slot="title"><a href="modify.html" target="mainframe">修改</a></template>
         </el-submenu>
          <el-submenu index="7">
-            <template slot="title">删除</template>
+            <template slot="title"><a href="delete.html" target="mainframe">删除</a></template>
         </el-submenu>
 
       </el-submenu>
@@ -71,15 +72,11 @@
     </el-menu>
                </el-col>
            </el-row>
-       </li>
-   </ul>
-     <ul>
-
-     </ul>
   </div>
-     <div class="main">
-<div class="right-up"></div>
-         <div class="right-down"></div>
+  <div class="main">
+        <iframe name="mainframe" id="frame_main" ></iframe>
+    </div>
+
      </div>
 
 
