@@ -3,8 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_2997476_n44xutwbqw.css">
+    <link rel="stylesheet" href="/static/web/css/manger.css">
+    <!--引入 element-ui 的样式，-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 必须先引入vue，  后使用element-ui -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <!-- 引入element 的组件库-->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
-<body>
 
+<body>
+ <div id="app">
+   <div class="left-nav">
+   <ul>
+       <li></li>
+     <li>
+       <i class="icon iconfont icon-jurassic_user"></i>
+       <div id="user">
+           用户类型
+           <br>
+           用户名
+       </div>
+
+     </li>
+       <li>
+           <el-row>
+               <el-col :span="4">
+                   <el-menu
+      default-active="2"
+      class="el-menu-vertical-demo"
+      @open="handleOpen"
+      @close="handleClose"
+      background-color="#334154"
+      text-color="#fff"
+      active-text-color="#ffd04b"
+      style="width: 10%">
+
+      <el-submenu index="1">
+        <template slot="title">
+          <span>销售管理</span>
+        </template>
+        <el-submenu index="2">
+            <template slot="title">查看订单</template>
+        </el-submenu>
+          <el-submenu index="3">
+            <template slot="title">数据统计</template>
+        </el-submenu>
+
+      </el-submenu>
+     <el-submenu index="4">
+        <template slot="title">
+          <span>菜单管理</span>
+        </template>
+        <el-submenu index="5">
+            <template slot="title">添加</template>
+        </el-submenu>
+         <el-submenu index="6">
+            <template slot="title">修改</template>
+        </el-submenu>
+         <el-submenu index="7">
+            <template slot="title">删除</template>
+        </el-submenu>
+
+      </el-submenu>
+
+    </el-menu>
+               </el-col>
+           </el-row>
+       </li>
+   </ul>
+     <ul>
+
+     </ul>
+  </div>
+     <div class="main">
+<div class="right-up"></div>
+         <div class="right-down"></div>
+     </div>
+
+
+
+
+</div>
+
+<script>
+  new Vue({
+      el: '#app',
+      data: function() {
+        return { visible: false }
+      },
+      methods: {
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      }
+    }
+    })
+</script>
 </body>
+
+
+
 </html>
