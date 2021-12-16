@@ -6,5 +6,12 @@
     </content>
     <orderEntry type="jdk" jdkName="Python 3.8 (tornadoWebApp)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="点餐系统" />
+    <orderEntry type="module" module-name="AwesomePOS-master" />
+    <orderEntry type="module" module-name="ruangong" />
+    <orderEntry type="library" name="element-ui" level="application" />
+    <orderEntry type="library" name="vue" level="application" />
+    <orderEntry type="library" name="jquery-3.0.0" level="application" />
+    <orderEntry type="library" name="vue-router" level="application" />
   </component>
 </module>

@@ -1,0 +1,72 @@
+.left-nav{
+       color: #ffffff;
+       height:100%;
+       background-color: #334154;
+       float:left;
+       width:10%;
+       height: 100%;
+       position: relative;
+    }
+.main{
+       color: #ffffff;
+       height:100%;
+       background-color: #e6e6e6;
+       float:right;
+       width:90%;
+       height: 100%;
+}
+.right-up{
+     color: #ffffff;
+       height:20%;
+       background-color: #e6e6e6;
+       float:right;
+       width:90%;
+}
+.right-down{
+     color: #ffffff;
+       height:80%;
+       background-color: #eee000;
+       float:right;
+       width:90%;
+    position: absolute;right: 0;bottom: 0;
+}
+html,body,#app{
+
+height:100%; margin:0;padding:0;
+    width:100%;
+    position: relative;
+
+}
+
+    .iconfont{
+       font-size:35px;
+    }
+    .left-nav ul{
+        padding:0px;
+        margin: 0px;
+    }
+    .left-nav li{
+        list-style: none;
+        text-align: center;
+        padding:10px;
+    }
+    #user{
+        list-style: none;
+        text-align: center;
+        height: 40px
+
+    }
+    a{
+        text-decoration:none;
+    }
+    a:link {color: #ffffff} /* 未访问的链接 */
+        a:visited {color: #ffffff} /* 已访问的链接 */
+        a:hover {color: #ffffff} /* 鼠标移动到链接上 */
+        a:active {color: #ffffff} /* 选定的链接 */
+        #frame_main{
+            width:100%;
+            height:100%;
+            float:right;
+        }
+
+

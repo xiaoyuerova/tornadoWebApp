@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/Desktop/AwesomePOS-master/.idea/AwesomePOS-master.iml" filepath="$USER_HOME$/Desktop/AwesomePOS-master/.idea/AwesomePOS-master.iml" />
+      <module fileurl="file://E:/code/ruangong/.idea/ruangong.iml" filepath="E:/code/ruangong/.idea/ruangong.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/tornadoWebApp.iml" filepath="$PROJECT_DIR$/.idea/tornadoWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../qq数据/747934484/FileRecv/点餐系统/.idea/点餐系统.iml" filepath="$PROJECT_DIR$/../../qq数据/747934484/FileRecv/点餐系统/.idea/点餐系统.iml" />
     </modules>
   </component>
 </project>
