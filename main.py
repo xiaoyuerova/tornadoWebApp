@@ -21,14 +21,15 @@ class Application(tornado.web.Application):
             (r"/login/", include('views.login.login_urls')),
             (r"/customers/", include('views.customers.customers_urls')),
             (r"/cateringStaffs/", include('views.cateringStaffs.cateringStaffs_urls')),
-            # (r"/cashiers/", include('views.cashiers.cashiers_urls')),
+            (r"/cashiers/", include('views.cashiers.cashiers_urls')),
             (r"/managers/", include('views.managers.managers_urls'))
         ])
         handles.append((r"/", LoginHandler))
         settings = dict(
             debug=True,
             static_path=os.path.join(os.path.dirname(__file__), "static"),
-            template_path=os.path.join(os.path.dirname(__file__), "templates")
+            template_path=os.path.join(os.path.dirname(__file__), "templates"),
+            csrf_cookies=False
         )
         tornado.web.Application.__init__(self, handles, **settings)
         self.db = scoped_session(sessionmaker(

@@ -16,6 +16,7 @@ from conf.base import (
     ERROR_CODE,
 )
 from common.models import (
+    BaseHandler,
     Managers,
     Cashiers,
     CateringStaffs
@@ -40,7 +41,7 @@ logger.addHandler(handler)
 
 class RegisterHandler(tornado.web.RequestHandler):
     """
-    handle /users/regist request
+    handle /login/register request
     """
 
     @property
@@ -63,7 +64,7 @@ class RegisterHandler(tornado.web.RequestHandler):
                 self.db.commit()
                 http_response(self, ERROR_CODE['1006'], '1006')
                 sleep(2)
-                self.render('login.html')
+                self.redirect("login.html")
 
         except Exception as e:
             self.db.rollback()
@@ -75,7 +76,7 @@ class RegisterHandler(tornado.web.RequestHandler):
     # 配餐员注册
     def case1(self, name, password):
         try:
-            catering_staff = self.db.query(CateringStaffs).filter(Managers.name == name).first()
+            catering_staff = self.db.query(CateringStaffs).filter(CateringStaffs.name == name).first()
             if catering_staff:
                 http_response(self, ERROR_CODE['1005'], '1005')
             else:
@@ -84,7 +85,7 @@ class RegisterHandler(tornado.web.RequestHandler):
                 self.db.commit()
                 http_response(self, ERROR_CODE['1006'], '1006')
                 sleep(2)
-                self.render('login.html')
+                self.redirect('login.html')
 
         except Exception as e:
             self.db.rollback()
@@ -96,7 +97,7 @@ class RegisterHandler(tornado.web.RequestHandler):
     # 收银员注册
     def case2(self, name, password):
         try:
-            cashier = self.db.query(Cashiers).filter(Managers.name == name).first()
+            cashier = self.db.query(Cashiers).filter(Cashiers.name == name).first()
             if cashier:
                 http_response(self, ERROR_CODE['1005'], '1005')
             else:
@@ -105,7 +106,7 @@ class RegisterHandler(tornado.web.RequestHandler):
                 self.db.commit()
                 http_response(self, ERROR_CODE['1006'], '1006')
                 sleep(2)
-                self.render('login.html')
+                self.redirect('login.html')
 
         except Exception as e:
             self.db.rollback()
@@ -125,17 +126,23 @@ class RegisterHandler(tornado.web.RequestHandler):
     }
 
     def get(self):
-        self.render("regist.html")
+        self.render("register.html")
 
     def post(self, *args, **kwargs):
         try:
             # 获取⼊参
             user_type = eval(self.get_argument('userType'))  # 用户类型：0：管理员，1：配餐员，2：收银员
-            name = eval(self.get_argument('name'))
-            password = eval(self.get_argument('password'))
+            name = self.get_argument('name')
+            password = self.get_argument('password')
 
             try:
-                self.switch.get(get_key(user_type))(name, password)
+                if len(name) < 6 | len(name) > 10:
+                    http_response(self, ERROR_CODE['1007'], '1007')
+                    return
+                if len(password) < 6 | len(password) > 12:
+                    http_response(self, ERROR_CODE['1008'], '1008')
+                    return
+                self.switch.get(get_key(user_type))(self, name, password)
 
             except Exception as e:
                 self.db.rollback()
@@ -163,7 +170,7 @@ def get_key(user_type):
 
 class LoginHandler(tornado.web.RequestHandler):
     """
-    handle /user/login request
+    handle /login/login request
     """
 
     @property
@@ -175,42 +182,40 @@ class LoginHandler(tornado.web.RequestHandler):
 
     # 管理员登录
     def case0(self, name, password):
-        try:
-            manager = self.db.query(Managers).filter(Managers.name == name).first()
-            if manager.password == password:
-                http_response(self, ERROR_CODE['0'], '0')
-                self.render("managerIndex.html")
-            else:
-                http_response(self, ERROR_CODE['1002'], '1002')
-        except Exception as e:
+        manager = self.db.query(Managers).filter(Managers.name == name).first()
+        if not manager:
             http_response(self, ERROR_CODE['1003'], '1003')
-            print(f"ERROR： {e}")
+            return
+        if manager.password == password:
+            http_response(self, ERROR_CODE['0'], '0')
+            self.redirect("managerIndex.html")
+        else:
+            http_response(self, ERROR_CODE['1002'], '1002')
 
     # 配餐员登录
     def case1(self, name, password):
-        try:
-            catering_staff = self.db.query(CateringStaffs).filter(CateringStaffs.name == name).first()
-            if catering_staff.password == password:
-                http_response(self, ERROR_CODE['0'], '0')
-                self.render("cateringStaffs.html")
-            else:
-                http_response(self, ERROR_CODE['1002'], '1002')
-        except Exception as e:
+        print(name)
+        catering_staff = self.db.query(CateringStaffs).filter(CateringStaffs.name == name).first()
+        if not catering_staff:
             http_response(self, ERROR_CODE['1003'], '1003')
-            print(f"ERROR： {e}")
+            return
+        if catering_staff.password == password:
+            http_response(self, ERROR_CODE['0'], '0')
+            self.redirect("cateringStaffs.html")
+        else:
+            http_response(self, ERROR_CODE['1002'], '1002')
 
     # 收银员登录
     def case2(self, name, password):
-        try:
-            cashier = self.db.query(Cashiers).filter(Cashiers.name == name).first()
-            if cashier.password == password:
-                http_response(self, ERROR_CODE['0'], '0')
-                self.render("cashiers.html")
-            else:
-                http_response(self, ERROR_CODE['1002'], '1002')
-        except Exception as e:
+        cashier = self.db.query(Cashiers).filter(Cashiers.name == name).first()
+        if not cashier:
             http_response(self, ERROR_CODE['1003'], '1003')
-            print(f"ERROR： {e}")
+            return
+        if cashier.password == password:
+            http_response(self, ERROR_CODE['0'], '0')
+            self.redirect("cashiers.html")
+        else:
+            http_response(self, ERROR_CODE['1002'], '1002')
 
     def default(self):
         http_response(self, ERROR_CODE['1004'], '1004')
@@ -229,12 +234,18 @@ class LoginHandler(tornado.web.RequestHandler):
         try:
             # 获取⼊参
             user_type = eval(self.get_argument('userType'))  # 用户类型：0：管理员，1：配餐员，2：收银员
-            name = eval(self.get_argument('name'))
-            password = eval(self.get_argument('password'))
+            name = self.get_argument('name')
+            password = self.get_argument('password')
 
             try:
-                self.switch.get(get_key(user_type))(name, password)
-
+                if len(name) < 6 | len(name) > 10:
+                    http_response(self, ERROR_CODE['1007'], '1007')
+                    return
+                if len(password) < 6 | len(password) > 12:
+                    http_response(self, ERROR_CODE['1008'], '1008')
+                    return
+                # 验证登录
+                self.switch.get(get_key(user_type))(self, name, password)
             except Exception as e:
                 self.db.rollback()
                 http_response(self, f"ERROR： {e}", '')

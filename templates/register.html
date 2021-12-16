@@ -2,49 +2,108 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- Custom Theme files -->
-    <link href="../static/web/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
-    <link href="../static/web/css/style.css" type="text/css" rel="stylesheet" media="all">
-    <link href="../static/web/css/font-awesome.css" rel="stylesheet"> <!-- font-awesome icons -->
-    <!-- //Custom Theme files -->
-    <!-- js -->
-    <script src="../static/web/js/jquery-2.2.3.min.js"></script>
-    <!-- //js -->
-
+    <title>点餐系统注册页面</title>
+    <script type="text/javascript" src='{{ static_url("web/js/vue.js") }}'></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
 <body>
-<div class="login-page about">
-    <img class="login-w3img" src="../static/web/images/img3.jpg" alt="">
-    <div class="container">
-        <h3 class="w3ls-title w3ls-title1">注册您的帐号</h3>
-        <div class="login-agileinfo">
-            <form action="#" method="post">
-                <input class="agile-ltext" type="text" name="Username" placeholder="用户名" required="">
-                <input class="agile-ltext" type="text" name="NickName" placeholder="昵称" required="">
-                <input class="agile-ltext" type="text" name="phone" placeholder="手机" required="">
-                <input class="agile-ltext" type="email" name="Your Email" placeholder="您的E-mail" required="">
-                <input class="agile-ltext" type="password" name="password" placeholder="密码" required="">
-                <input class="agile-ltext" type="password" name="Confirm Password" placeholder="确认密码" required="">
-                <div class="wthreelogin-text">
-                    <ul>
-                        <li>
-                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>
-                                <span>我同意相关规定和政策</span>
-                            </label>
-                        </li>
-                    </ul>
-                    <div class="clearfix"> </div>
-                </div>
-                <input type="submit" value="注册">
-            </form>
-            <p>已有帐号?  <a href="login.html"> 现在登录!</a></p>
+<div id="root" class="container">
+    <div class="clearfix">
+        <div class="login">
+            <el-form ref="form" :model="form" label-width="80px">
+                <el-form-item label="用户类型">
+                    <el-select v-model="form.userType" placeholder="请选择用户类型">
+                        <el-option label="管理员" value="0"></el-option>
+                        <el-option label="配餐员" value="1"></el-option>
+                        <el-option label="收银员" value="2"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="用户名称">
+                    <el-input v-model="form.userName" placeholder="请输入6-10位字母或数字"></el-input>
+                </el-form-item>
+                <el-form-item label="登录密码">
+                    <el-input v-model="form.password" placeholder="请输入6-12位字母或数字"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="onSubmit()" style="width: 220px">注册</el-button>
+                </el-form-item>
+            </el-form>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    Vue.prototype.$http = axios
+
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            form: {
+                userType: '',
+                userName: '',
+                password: '',
+            }
+        },
+        methods: {
+            onSubmit() {
+                let params = new URLSearchParams()
+                params.append('userType', this.form.userType)
+                params.append('name', this.form.userName)
+                params.append('password', this.form.password)
+                this.$http.post('http://127.0.0.1:8000/login/register', params).then(function (response) {
+                    console.log(response.data)
+                    const data = response.data.data
+                    // console.log(typeof (data))
+                    // console.log(Object.getOwnPropertyNames(data.data))
+                    if (data.code !== "0") {
+                        alert(data.msg)
+                    }
+                })
+            },
+            alert(msg) {
+                console.log(msg)
+                this.$alert(msg, 'error!', {
+                    confirmButtonText: '确定',
+                    callback: action => {
+                        this.$message({
+                            type: 'info',
+                            message: `action: ${action}`
+                        });
+                    }
+                });
+            }
+        }
+    })
+</script>
+<style>
+    .container {
+        display: block;
+        margin: auto;
+        width: 1200px;
+        height: 675px;
+    }
+
+    .clearfix {
+        /*clear: both;*/
+        /*display: table;*/
+    }
+
+    .box {
+        box-sizing: border-box;
+        float: left;
+        width: 50%;
+        height: 500px;
+        text-align: center;
+    }
+
+    .login {
+        display: block;
+        margin: auto;
+        width: 300px;
+        padding-top: 150px;
+    }
+</style>
 </body>
 </html>

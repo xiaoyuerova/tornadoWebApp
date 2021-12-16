@@ -1,46 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>登录</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="keywords" content="" />
-	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-	<!-- Custom Theme files -->
-	<link href="../static/web/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
-	<link href="../static/web/css/style.css" type="text/css" rel="stylesheet" media="all">
-	<link href="../static/web/css/font-awesome.css" rel="stylesheet"> <!-- font-awesome icons -->
-	<!-- //Custom Theme files -->
-	<!-- js -->
-	<script src="../static/web/js/jquery-2.2.3.min.js"></script>
-	<!-- //js -->
-	<meta charset="UTF-8">
-	<title>Title</title>
+    <meta charset="UTF-8">
+    <title>点餐系统登陆页面</title>
+    <script type="text/javascript" src='{{ static_url("web/js/vue.js") }}'></script>
+    <!--    <script type="text/javascript" src='{{ static_url("web/js/axios.js") }}'></script>-->
+    <!--        <link rel="stylesheet" href='{{ static_url("web/lib/elementUi/index.css") }}'>-->
+    <!--        <script src='{{ static_url("web/lib/elementUi/index.js") }}'></script>-->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
 <body>
-<div class="login-page about">
-	<div class="container">
-		<h3 class="w3ls-title w3ls-title1">登录您的账户</h3>
-		<div class="login-agileinfo">
-			<form action="#" method="post">
-				<input class="agile-ltext" type="text" name="Username" placeholder="用户名" required="">
-				<input class="agile-ltext" type="password" name="password" placeholder="密码" required="">
-				<div class="wthreelogin-text">
-					<ul>
-						<li>
-							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>
-								<span> 记住我 ?</span>
-							</label>
-						</li>
-						<li><a href="#">忘记密码?</a> </li>
-					</ul>
-					<div class="clearfix"> </div>
-				</div>
-				<a href="login.html"><input type="submit" value="登录"></a>
-			</form>
-			<p>没有帐号? <a href="register.html"> 现在注册!</a></p>
-		</div>
-	</div>
+<div id="root" class="container">
+    <div class="clearfix">
+        <div class="login">
+            <el-form ref="form" :model="form" label-width="80px">
+                <el-form-item label="用户类型">
+                    <el-select v-model="form.userType" placeholder="请选择用户类型">
+                        <el-option label="管理员" value="0"></el-option>
+                        <el-option label="配餐员" value="1"></el-option>
+                        <el-option label="收银员" value="2"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="用户名称">
+                    <el-input v-model="form.userName" placeholder="请输入用户名"></el-input>
+                </el-form-item>
+                <el-form-item label="登录密码">
+                    <el-input v-model="form.password" placeholder="请输入密码"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="login_submit()" style="width: 220px">登录</el-button>
+                </el-form-item>
+                <el-form-item>
+                    <a href='{{ "register" }}'>
+                        <div style="text-align: center;width: 220px">
+                            <span>没有账号？点击注册</span>
+                        </div>
+                    </a>
+                </el-form-item>
+            </el-form>
+        </div>
+    </div>
 </div>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    Vue.prototype.$http = axios
+
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            form: {
+                userType: '',
+                userName: '',
+                password: '',
+            }
+        },
+        methods: {
+            login_submit() {
+                let params = new URLSearchParams()
+                params.append('userType', this.form.userType)
+                params.append('name', this.form.userName)
+                params.append('password', this.form.password)
+                this.$http.post('http://127.0.0.1:8000/login/login', params)
+                    .then(function (response) {
+                            const data = response.data.data
+                            if (data.code !== "0") {
+                                alert(data.msg)
+                            }
+                        }
+                    )
+            },
+            alert(msg) {
+                console.log(msg)
+                this.$alert(msg, 'error!', {
+                    confirmButtonText: '确定',
+                    callback: action => {
+                        this.$message({
+                            type: 'info',
+                            message: `action: ${action}`
+                        });
+                    }
+                });
+            }
+        }
+    })
+</script>
+<style>
+    .container {
+        display: block;
+        margin: auto;
+        width: 1200px;
+        height: 675px;
+    }
+
+    .clearfix {
+        /*clear: both;*/
+        /*display: table;*/
+    }
+
+    .box {
+        box-sizing: border-box;
+        float: left;
+        width: 50%;
+        height: 500px;
+        text-align: center;
+    }
+
+    .login {
+        display: block;
+        margin: auto;
+        width: 300px;
+        padding-top: 150px;
+    }
+</style>
 </body>
 </html>

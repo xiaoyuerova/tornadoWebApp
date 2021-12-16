@@ -73,7 +73,6 @@ class LoginHandle(tornado.web.RequestHandler):
             try:
                 self.customers_id = self.query_customer(table_id)
 
-                # tornado 默认是异步执行‘write()’
                 if not self.customers_id:
                     self.db.add(Customers(table_id))
                     self.db.commit()
