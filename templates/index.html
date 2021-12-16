@@ -1,317 +1,474 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>首页</title>
-    <!--    适配移动端-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--    网页图标 -->
-    <link rel="icon" href="../static/web/images/title.ico">
-    <!--    全局样式-->
-    <link rel="stylesheet" href="../static/web/css/reset.css">
-    <!--    字体图标-->
-    <link rel="stylesheet" href="../static/web/css/iconfont.css">
-    <!--    主体的样式-->
-    <link rel="stylesheet" href="../static/web/css/container.css">
-    <!--    页脚的样式-->
-    <link rel="stylesheet" href="../static/web/css/footer.css">
-    <!--    首页的样式-->
-    <link rel="stylesheet" href="../static/web/css/index.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>jQuery外卖订餐购物车代码 - DD博客</title>
+	<link rel="stylesheet" href="../static/web/css/main.css">
 </head>
+
 <body>
 <!--导航开始-->
 <div class="nav">
     <div class="city">
         <span>合肥</span>
-<!--        target="_blank"代表新窗口打开-->
+        <!--        target="_blank"代表新窗口打开-->
         <a href="city.html" class="iconfont" target="_blank">&#xe650;</a>
     </div>
-    <div class="title">望香阁</div>
+    <div class="title">科大美食</div>
     <div class="search"><i class="iconfont">&#xe62f;</i></div>
 </div>
 <!--导航结束-->
 <div class="clearHeight"></div>
-<!--banner部分开始-->
 <div class="banner">
     <img src="../static/web/images/banner1.png" alt="">
-    <ul class="btn">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
 </div>
-<!--banner部分结束-->
 <!--消息开始-->
 <div class="message">
     <i class="iconfont">&#xe61f;</i>
     <span>开心每一刻，七号影像点餐系列一</span>
 </div>
 <!--消息结束-->
-<!--菜单开始-->
-<div class="menu">
-    <div class="menu-active">
-        <a href="#">
-            <img src="../static/web/images/menu1.png" alt="">
-            <p>立即订餐</p>
-        </a>
-    </div>
-    <div>
-        <a href="waimai.html">
-            <img src="../static/web/images/menu2.png" alt="">
-            <p>叫外卖</p>
-        </a>
-    </div>
-    <div>
-        <a href="#">
-            <img src="../static/web/images/menu3.png" alt="">
-            <p>立即订餐</p>
-        </a>
-    </div>
-    <div>
-        <a href="#">
-            <img src="../static/web/images/menu4.png" alt="">
-            <p>立即订餐</p>
-        </a>
-    </div>
+<div class="main">
+	<div class="left-menu">
+		<ul>  
+           <li class="active">营养套餐<span class="num-price"></span></li>  
+           <li>酒水饮料</li>  
+           <li>酒水饮料</li>  
+           <li>酒水饮料</li> 
+		   <li>酒水饮料</li>  
+           <li>酒水饮料</li>  
+           <li>酒水饮料</li> 
+		   <li>酒水饮料</li>  
+           <li>酒水饮料</li>  
+           <li>酒水饮料</li> 
+		   <li>酒水饮料</li>  
+           <li>酒水饮料</li>  
+           <li>酒水饮料</li>  
+        </ul> 
+	</div>
+	<div class="con">
+		<div class="right-con con-active">
+			<ul>
+				<li>
+					<div class="menu-img"><img src="../static/web/images/pic.png" width="55" height="55" /></div>
+					<div class="menu-txt">
+						<h4>宫保鸡丁</h4>
+						<p class="list1">家常菜</p>
+						<p class="list2">
+							<b>￥25</b>
+							<div class="btn">  
+								 <button class="minus">  
+									 <strong></strong>  
+								 </button>  
+								 <i>0</i>  
+								  <button class="add">  
+									 <strong></strong>  
+								 </button>  
+								 <i class="price">25</i>  
+							 </div> 
+						</p>
+					</div>
+				</li>
+				<li>
+					<div class="menu-img"><img src="../static/web/images/pic.png" width="55" height="55" /></div>
+					<div class="menu-txt">
+						<h4>宫保鸡丁</h4>
+						<p class="list1">家常菜</p>
+						<p class="list2">
+							<b>￥25</b>
+							<div class="btn">  
+								 <button class="minus">  
+									 <strong></strong>  
+								 </button>  
+								 <i>0</i>  
+								  <button class="add">  
+									 <strong></strong>  
+								 </button>  
+								 <i class="price">25</i>  
+							 </div> 
+						</p>
+					</div>
+				</li>
+				<li>
+					<div class="menu-img"><img src="../static/web/images/pic.png" width="55" height="55" /></div>
+					<div class="menu-txt">
+						<h4>宫保鸡丁</h4>
+						<p class="list1">家常菜</p>
+						<p class="list2">
+							<b>￥25</b>
+							<div class="btn">  
+								 <button class="minus">  
+									 <strong></strong>  
+								 </button>  
+								 <i>0</i>  
+								  <button class="add">  
+									 <strong></strong>  
+								 </button>  
+								 <i class="price">25</i>  
+							 </div> 
+						</p>
+					</div>
+				</li>
+				<li>
+					<div class="menu-img"><img src="../static/web/images/pic.png" width="55" height="55" /></div>
+					<div class="menu-txt">
+						<h4>宫保鸡丁</h4>
+						<p class="list1">家常菜</p>
+						<p class="list2">
+							<b>￥25</b>
+							<div class="btn">  
+								 <button class="minus">  
+									 <strong></strong>  
+								 </button>  
+								 <i>0</i>  
+								  <button class="add">  
+									 <strong></strong>  
+								 </button>  
+								 <i class="price">25</i>  
+							 </div> 
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="right-con">
+			<ul>
+				<li>
+					<div class="menu-img"><img src="../static/web/images/pic.png" width="55" height="55" /></div>
+					<div class="menu-txt">
+						<h4>京酱肉丝</h4>
+						<p class="list1">家常菜</p>
+						<p class="list2">
+							<b>￥25</b>
+							<div class="btn">  
+								 <button class="minus">  
+									 <strong></strong>  
+								 </button>  
+								 <i>0</i>  
+								  <button class="add">  
+									 <strong></strong>  
+								 </button>  
+								 <i class="price">25</i>  
+							 </div> 
+						</p>
+					</div>
+				</li>
+				<li>
+					<div class="menu-img"><img src="../static/web/images/pic.png" width="55" height="55" /></div>
+					<div class="menu-txt">
+						<h4>京酱肉丝</h4>
+						<p class="list1">家常菜</p>
+						<p class="list2">
+							<b>￥25</b>
+							<div class="btn">  
+								 <button class="minus">  
+									 <strong></strong>  
+								 </button>  
+								 <i>0</i>  
+								  <button class="add">  
+									 <strong></strong>  
+								 </button>  
+								 <i class="price">25</i>  
+							 </div> 
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="right-con">
+			<ul>
+				<li>
+					<div class="menu-img"><img src="../static/web/images/pic.png" width="55" height="55" /></div>
+					<div class="menu-txt">
+						<h4>京酱肉丝</h4>
+						<p class="list1">家常菜</p>
+						<p class="list2">
+							<b>￥25</b>
+							<div class="btn">  
+								 <button class="minus">  
+									 <strong></strong>  
+								 </button>  
+								 <i>0</i>  
+								  <button class="add">  
+									 <strong></strong>  
+								 </button>  
+								 <i class="price">25</i>  
+							 </div> 
+						</p>
+					</div>
+				</li>
+				<li>
+					<div class="menu-img"><img src="../static/web/images/pic.png" width="55" height="55" /></div>
+					<div class="menu-txt">
+						<h4>京酱肉丝</h4>
+						<p class="list1">家常菜</p>
+						<p class="list2">
+							<b>￥25</b>
+							<div class="btn">  
+								 <button class="minus">  
+									 <strong></strong>  
+								 </button>  
+								 <i>0</i>  
+								  <button class="add">  
+									 <strong></strong>  
+								 </button>  
+								 <i class="price">25</i>  
+							 </div> 
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="right-con">
+			<ul>
+				<li>
+					<div class="menu-img"><img src="../static/web/images/pic.png" width="55" height="55" /></div>
+					<div class="menu-txt">
+						<h4>京酱肉丝</h4>
+						<p class="list1">家常菜</p>
+						<p class="list2">
+							<b>￥25</b>
+							<div class="btn">  
+								 <button class="minus">  
+									 <strong></strong>  
+								 </button>  
+								 <i>0</i>  
+								  <button class="add">  
+									 <strong></strong>  
+								 </button>  
+								 <i class="price">25</i>  
+							 </div> 
+						</p>
+					</div>
+				</li>
+				<li>
+					<div class="menu-img"><img src="../static/web/images/pic.png" width="55" height="55" /></div>
+					<div class="menu-txt">
+						<h4>京酱肉丝</h4>
+						<p class="list1">家常菜</p>
+						<p class="list2">
+							<b>￥25</b>
+							<div class="btn">  
+								 <button class="minus">  
+									 <strong></strong>  
+								 </button>  
+								 <i>0</i>  
+								  <button class="add">  
+									 <strong></strong>  
+								 </button>  
+								 <i class="price">25</i>  
+							 </div> 
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="right-con">
+			<ul>
+				<li>
+					<div class="menu-img"><img src="../static/web/images/pic.png" width="55" height="55" /></div>
+					<div class="menu-txt">
+						<h4>京酱肉丝</h4>
+						<p class="list1">家常菜</p>
+						<p class="list2">
+							<b>￥25</b>
+							<div class="btn">  
+								 <button class="minus">  
+									 <strong></strong>  
+								 </button>  
+								 <i>0</i>  
+								  <button class="add">  
+									 <strong></strong>  
+								 </button>  
+								 <i class="price">25</i>  
+							 </div> 
+						</p>
+					</div>
+				</li>
+				<li>
+					<div class="menu-img"><img src="../static/web/images/pic.png" width="55" height="55" /></div>
+					<div class="menu-txt">
+						<h4>京酱肉丝</h4>
+						<p class="list1">家常菜</p>
+						<p class="list2">
+							<b>￥25</b>
+							<div class="btn">  
+								 <button class="minus">  
+									 <strong></strong>  
+								 </button>  
+								 <i>0</i>  
+								  <button class="add">  
+									 <strong></strong>  
+								 </button>  
+								 <i class="price">25</i>  
+							 </div> 
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="right-con">
+			<ul>
+				<li>
+					<div class="menu-img"><img src="../static/web/images/pic.png" width="55" height="55" /></div>
+					<div class="menu-txt">
+						<h4>京酱肉丝</h4>
+						<p class="list1">家常菜</p>
+						<p class="list2">
+							<b>￥25</b>
+							<div class="btn">  
+								 <button class="minus">  
+									 <strong></strong>  
+								 </button>  
+								 <i>0</i>  
+								  <button class="add">  
+									 <strong></strong>  
+								 </button>  
+								 <i class="price">25</i>  
+							 </div> 
+						</p>
+					</div>
+				</li>
+				<li>
+					<div class="menu-img"><img src="../static/web/images/pic.png" width="55" height="55" /></div>
+					<div class="menu-txt">
+						<h4>京酱肉丝</h4>
+						<p class="list1">家常菜</p>
+						<p class="list2">
+							<b>￥25</b>
+							<div class="btn">  
+								 <button class="minus">  
+									 <strong></strong>  
+								 </button>  
+								 <i>0</i>  
+								  <button class="add">  
+									 <strong></strong>  
+								 </button>  
+								 <i class="price">25</i>  
+							 </div> 
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="right-con">
+			<ul>
+				<li>
+					<div class="menu-img"><img src="../static/web/images/pic.png" width="55" height="55" /></div>
+					<div class="menu-txt">
+						<h4>京酱肉丝</h4>
+						<p class="list1">家常菜</p>
+						<p class="list2">
+							<b>￥25</b>
+							<div class="btn">  
+								 <button class="minus">  
+									 <strong></strong>  
+								 </button>  
+								 <i>0</i>  
+								  <button class="add">  
+									 <strong></strong>  
+								 </button>  
+								 <i class="price">25</i>  
+							 </div> 
+						</p>
+					</div>
+				</li>
+				<li>
+					<div class="menu-img"><img src="../static/web/images/pic.png" width="55" height="55" /></div>
+					<div class="menu-txt">
+						<h4>京酱肉丝</h4>
+						<p class="list1">家常菜</p>
+						<p class="list2">
+							<b>￥25</b>
+							<div class="btn">  
+								 <button class="minus">  
+									 <strong></strong>  
+								 </button>  
+								 <i>0</i>  
+								  <button class="add">  
+									 <strong></strong>  
+								 </button>  
+								 <i class="price">25</i>  
+							 </div> 
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="footer">  
+		<div class="left">已选：
+		<span id="cartN">
+			<span id="totalcountshow">0</span>份　总计：￥<span id="totalpriceshow">0</span></span>元  
+		</div>  
+		<div class="right">  
+			<a id="btnselect" class="xhlbtn  disable" href="javascript:void(0)">去结算</a>  
+		</div>   
+	</div>
 </div>
-<!--菜单结束-->
-<!--餐厅标题开始-->
-<div class="ct-title">推荐餐厅</div>
-<!--餐厅标题结束-->
-<!--主体开始-->
-<div class="container">
-    <div class="sj-item">
-        <div class="sj-top">
-            <img src="../static/web/images/shangjia2.png" alt="">
-            <div class="sj-info">
-                <p>汉拿山烤肉</p>
-                <p>人均：￥120.00 | 10人预定</p>
-                <p>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont grey">&#xe636;</i>
-                </p>
-            </div>
-            <span class="order">订</span>
-        </div>
-        <div class="sj-bottom">赛蒂国际工业园</div>
-    </div>
-    <div class="sj-item">
-        <div class="sj-top">
-            <img src="../static/web/images/shangjia2.png" alt="">
-            <div class="sj-info">
-                <p>汉拿山烤肉</p>
-                <p>人均：￥120.00 | 10人预定</p>
-                <p>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont grey">&#xe636;</i>
-                </p>
-            </div>
-            <span class="order">订</span>
-        </div>
-        <div class="sj-bottom">赛蒂国际工业园</div>
-    </div>
-    <div class="sj-item">
-        <div class="sj-top">
-            <img src="../static/web/images/shangjia2.png" alt="">
-            <div class="sj-info">
-                <p>汉拿山烤肉</p>
-                <p>人均：￥120.00 | 10人预定</p>
-                <p>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont grey">&#xe636;</i>
-                </p>
-            </div>
-            <span class="order">订</span>
-        </div>
-        <div class="sj-bottom">赛蒂国际工业园</div>
-    </div>
-    <div class="sj-item">
-        <div class="sj-top">
-            <img src="../static/web/images/shangjia2.png" alt="">
-            <div class="sj-info">
-                <p>汉拿山烤肉</p>
-                <p>人均：￥120.00 | 10人预定</p>
-                <p>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont grey">&#xe636;</i>
-                </p>
-            </div>
-            <span class="order">订</span>
-        </div>
-        <div class="sj-bottom">赛蒂国际工业园</div>
-    </div>
-    <div class="sj-item">
-        <div class="sj-top">
-            <img src="../static/web/images/shangjia2.png" alt="">
-            <div class="sj-info">
-                <p>汉拿山烤肉</p>
-                <p>人均：￥120.00 | 10人预定</p>
-                <p>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont grey">&#xe636;</i>
-                </p>
-            </div>
-            <span class="order">订</span>
-        </div>
-        <div class="sj-bottom">赛蒂国际工业园</div>
-    </div>
-    <div class="sj-item">
-        <div class="sj-top">
-            <img src="../static/web/images/shangjia2.png" alt="">
-            <div class="sj-info">
-                <p>汉拿山烤肉</p>
-                <p>人均：￥120.00 | 10人预定</p>
-                <p>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont grey">&#xe636;</i>
-                </p>
-            </div>
-            <span class="order">订</span>
-        </div>
-        <div class="sj-bottom">赛蒂国际工业园</div>
-    </div>
-    <div class="sj-item">
-        <div class="sj-top">
-            <img src="../static/web/images/shangjia2.png" alt="">
-            <div class="sj-info">
-                <p>汉拿山烤肉</p>
-                <p>人均：￥120.00 | 10人预定</p>
-                <p>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont grey">&#xe636;</i>
-                </p>
-            </div>
-            <span class="order">订</span>
-        </div>
-        <div class="sj-bottom">赛蒂国际工业园</div>
-    </div>
-    <div class="sj-item">
-        <div class="sj-top">
-            <img src="../static/web/images/shangjia2.png" alt="">
-            <div class="sj-info">
-                <p>汉拿山烤肉</p>
-                <p>人均：￥120.00 | 10人预定</p>
-                <p>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont grey">&#xe636;</i>
-                </p>
-            </div>
-            <span class="order">订</span>
-        </div>
-        <div class="sj-bottom">赛蒂国际工业园</div>
-    </div>
-    <div class="sj-item">
-        <div class="sj-top">
-            <img src="../static/web/images/shangjia2.png" alt="">
-            <div class="sj-info">
-                <p>汉拿山烤肉</p>
-                <p>人均：￥120.00 | 10人预定</p>
-                <p>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont grey">&#xe636;</i>
-                </p>
-            </div>
-            <span class="order">订</span>
-        </div>
-        <div class="sj-bottom">赛蒂国际工业园</div>
-    </div>
-    <div class="sj-item">
-        <div class="sj-top">
-            <img src="../static/web/images/shangjia2.png" alt="">
-            <div class="sj-info">
-                <p>汉拿山烤肉</p>
-                <p>人均：￥120.00 | 10人预定</p>
-                <p>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont grey">&#xe636;</i>
-                </p>
-            </div>
-            <span class="order">订</span>
-        </div>
-        <div class="sj-bottom">赛蒂国际工业园</div>
-    </div>
-    <div class="sj-item">
-        <div class="sj-top">
-            <img src="../static/web/images/shangjia2.png" alt="">
-            <div class="sj-info">
-                <p>汉拿山烤肉</p>
-                <p>人均：￥120.00 | 10人预定</p>
-                <p>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont">&#xe636;</i>
-                    <i class="iconfont grey">&#xe636;</i>
-                </p>
-            </div>
-            <span class="order">订</span>
-        </div>
-        <div class="sj-bottom">赛蒂国际工业园</div>
-    </div>
-</div>
-<!--主体结束-->
-<div class="clearHeight"></div>
-<!--页脚开始-->
-<div class="footer">
-    <div class="footer-active">
-        <a href="#">
-            <i class="iconfont">&#xe600;</i>
-            <p>首页</p>
-        </a>
-    </div>
-    <div>
-        <a href="#">
-            <i class="iconfont">&#xe600;</i>
-            <p>附近</p>
-        </a>
-    </div>
-    <div>
-        <a href="user.html">
-            <i class="iconfont">&#xe68a;</i>
-            <p>用户</p>
-        </a>
-    </div>
-    <div>
-        <a href="#">
-            <i class="iconfont">&#xe600;</i>
-            <p>首页</p>
-        </a>
-    </div>
-</div>
-<!--页脚结束-->
 
+<script type="text/javascript" src="../static/web/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(function () {  
+	//加的效果  
+	$(".add").click(function () {  
+		$(this).prevAll().css("display", "inline-block");  
+		var n = $(this).prev().text();  
+		var num = parseInt(n) + 1;  
+		if (num == 0) { return; }  
+		$(this).prev().text(num);  
+		var danjia = $(this).next().text();//获取单价  
+		var a = $("#totalpriceshow").html();//获取当前所选总价  
+		$("#totalpriceshow").html((a * 1 + danjia * 1).toFixed(2));//计算当前所选总价  
+		  
+		var nm = $("#totalcountshow").html();//获取数量  
+		$("#totalcountshow").html(nm*1+1);  
+		jss();//<span style='font-family: Arial, Helvetica, sans-serif;'></span>   改变按钮样式
+	});  
+	//减的效果  
+	$(".minus").click(function () {  
+		var n = $(this).next().text();  
+		var num = parseInt(n) - 1;  
+
+		$(this).next().text(num);//减1  
+
+		var danjia = $(this).nextAll(".price").text();//获取单价  
+		var a = $("#totalpriceshow").html();//获取当前所选总价  
+		$("#totalpriceshow").html((a * 1 - danjia * 1).toFixed(2));//计算当前所选总价  
+		 
+		var nm = $("#totalcountshow").html();//获取数量  
+		$("#totalcountshow").html(nm * 1 - 1);  
+		//如果数量小于或等于0则隐藏减号和数量  
+		if (num <= 0) {  
+			$(this).next().css("display", "none");  
+			$(this).css("display", "none");  
+			jss();//改变按钮样式  
+			 return  
+		}  
+	});  
+	function jss() {  
+		var m = $("#totalcountshow").html();  
+		if (m > 0) {  
+			$(".right").find("a").removeClass("disable");  
+		} else {  
+		   $(".right").find("a").addClass("disable");  
+		}  
+	};
+	//选项卡
+	$(".con>div").hide();
+	$(".con>div:eq(0)").show();	
+	
+	$(".left-menu li").click(function(){
+		$(this).addClass("active").siblings().removeClass("active");
+		var n = $(".left-menu li").index(this);
+		$(".left-menu li").index(this);
+		$(".con>div").hide();
+		$(".con>div:eq("+n+")").show();	
+	});
+});  
+</script>
 
 </body>
 </html>
+

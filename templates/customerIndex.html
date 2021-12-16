@@ -1,537 +1,299 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>首页</title>
-    <!--    适配移动端-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--    网页图标 -->
-    <link rel="icon" href="../static/web/images/title.ico">
-    <!--    全局样式-->
-    <link rel="stylesheet" href="../static/web/css/reset.css">
-    <!--    字体图标-->
-    <link rel="stylesheet" href="../static/web/css/iconfont.css">
-    <!--    主体的样式-->
-    <link rel="stylesheet" href="../static/web/css/container.css">
-    <!--    页脚的样式-->
-    <link rel="stylesheet" href="../static/web/css/footer.css">
-    <!--    首页的样式-->
-    <link rel="stylesheet" href="../static/web/css/index.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- Custom Theme files -->
-    <link href="../static/web/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
-    <link href="../static/web/css/style.css" type="text/css" rel="stylesheet" media="all">
-    <link href="../static/web/css/font-awesome.css" rel="stylesheet"> <!-- font-awesome icons -->
-    <link rel="stylesheet" href="../static/web/css/owl.carousel.css" type="text/css" media="all"/> <!-- Owl-Carousel-CSS -->
-    <!-- //Custom Theme files -->
-    <!-- js -->
-    <script src="../static/web/js/jquery-2.2.3.min.js"></script>
-    <!-- //js -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<title>商品</title>
+<link rel="stylesheet" type="text/css" href="../static/web/css/aui.css">
+<link rel="stylesheet" href="../static/web/css/classify.css">
+<style>
+	html,body{height: 100%;max-width: 640px;margin:0 auto;}
+	.aui-bar-nav{border:none;background: #f5f5f5;}
+	.main{height: calc(100% - 4.5rem);}
 
+	#tab1-con1{padding-bottom: 3rem;}
+	#tab1-con1,#tab1-con2{height: 100%;}
+	.aui-tab{border-bottom: solid 1px #eee;background: #f5f5f5;height: 2.25rem;}
+	.aui-tab-item{font-size: .75rem;color: #666;width: 25%;}
+	.aui-tab-item.aui-active{border:none;color: #000;position: relative;}
+	.aui-tab-item.aui-active:after{position: absolute;left: 40%;width: 20%;height: 2px;background: #00ae66;content: '';bottom:0;}
+</style>
 </head>
 <body>
-<!--导航开始-->
-<div class="nav">
-    <div class="city">
-        <span>合肥</span>
-        <!--        target="_blank"代表新窗口打开-->
-        <a href="city.html" class="iconfont" target="_blank">&#xe650;</a>
-    </div>
-    <div class="title">科大美食</div>
-    <div class="search"><i class="iconfont">&#xe62f;</i></div>
-</div>
-<!--导航结束-->
-<div class="clearHeight"></div>
-<div class="banner">
-    <img src="../static/web/images/banner1.png" alt="">
-</div>
-<!--消息开始-->
-<div class="message">
-    <i class="iconfont">&#xe61f;</i>
-    <span>开心每一刻，七号影像点餐系列一</span>
-</div>
-<!--消息结束-->
-<!--菜单开始-->
-<div class="menu">
-    <div class="menu-active">
-        <a href="#">
-            <img src="../static/web/images/menu1.png" alt="">
-            <p>套餐</p>
+
+    <header class="aui-bar aui-bar-nav">
+        <a class="aui-pull-left aui-btn">
+            <span class="aui-iconfont aui-icon-left"></span>
         </a>
-    </div>
-    <div>
-        <a href="waimai.html">
-            <img src="../static/web/images/menu4.png" alt="">
-            <p>主食</p>
-        </a>
-    </div>
-    <div>
-        <a href="#">
-            <img src="../static/web/images/menu3.png" alt="">
-            <p>小吃</p>
-        </a>
-    </div>
-    <div>
-        <a href="#">
-            <img src="../static/web/images/menu2.png" alt="">
-            <p>饮品</p>
-        </a>
-    </div>
-</div>
-<!--菜单结束-->
-<!--餐厅标题开始-->
-<div class="ct-title">点击加入购物车</div>
-<!--餐厅标题结束-->
-<!--主体开始-->
-<div class="container">
-    <div class="col-md-9 product-w3ls-right">
-        <div class="products-row">
-            <div class="col-xs-6 col-sm-4 product-grids">
-                <div class="flip-container">
-                    <div class="flipper agile-products">
-                        <div class="front">
-                            <img src="images\g1.jpg" class="img-responsive" alt="img">
-                            <div class="agile-product-text">
-                                <h5>西餐小食组合</h5>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <h4>西餐小食组合</h4>
-                            <p>牛角面包加水果沙拉加三明治加小牛排</p>
-                            <h6>45.0<sup>￥</sup></h6>
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="1">
-                                <input type="hidden" name="w3ls_item" value="西餐小食组合">
-                                <input type="hidden" name="amount" value="45.0">
-                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i>加入购物车</button>
-                                <span class="w3-agile-line"> </span>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-4 product-grids">
-                <div class="flip-container">
-                    <div class="flipper agile-products">
-                        <div class="front">
-                            <img src="images\g2.jpg" class="img-responsive" alt="img">
-                            <div class="agile-product-text">
-                                <h5>鳕鱼海鲜饭</h5>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <h4>鳕鱼海鲜饭</h4>
-                            <p>香煎鳕鱼排加美味米饭和寿司</p>
-                            <h6>26.0<sup>￥</sup></h6>
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="2">
-                                <input type="hidden" name="w3ls_item" value="鳕鱼海鲜饭">
-                                <input type="hidden" name="amount" value="26.0">
-                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i>加入购物车</button>
-                                <span class="w3-agile-line"> </span>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-4 product-grids">
-                <div class="flip-container">
-                    <div class="flipper agile-products">
-                        <div class="front">
-                            <img src="images\g3.jpg" class="img-responsive" alt="img">
-                            <div class="agile-product-text">
-                                <h5>奶油夹心面包</h5>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <h4>奶油夹心面包</h4>
-                            <p>香甜奶油夹心，松软口感的夹心面包</p>
-                            <h6>6.0<sup>￥</sup></h6>
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="3">
-                                <input type="hidden" name="w3ls_item" value="奶油夹心面包">
-                                <input type="hidden" name="amount" value="6.0">
-                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i>加入购物车</button>
-                                <span class="w3-agile-line"> </span>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-4 product-grids">
-                <div class="flip-container">
-                    <div class="flipper agile-products">
-                        <div class="front">
-                            <img src="images\g4.jpg" class="img-responsive" alt="img">
-                            <div class="agile-product-text">
-                                <h5>蔬菜沙拉</h5>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <h4>蔬菜沙拉</h4>
-                            <p>绿色健康的各种蔬菜配合鲜美沙拉酱的经典组合</p>
-                            <h6>18.0<sup>￥</sup></h6>
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="4">
-                                <input type="hidden" name="w3ls_item" value="蔬菜沙拉">
-                                <input type="hidden" name="amount" value="18.0">
-                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i>加入购物车</button>
-                                <span class="w3-agile-line"> </span>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-4 product-grids">
-                <div class="flip-container">
-                    <div class="flipper agile-products">
-                        <div class="front">
-                            <img src="images\g5.jpg" class="img-responsive" alt="img">
-                            <div class="agile-product-text">
-                                <h5>三人套餐</h5>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <h4>三人套餐</h4>
-                            <p>汉堡薯条加上美味松软的马卡龙。分量十足满足你的胃</p>
-                            <h6>68.0<sup>￥</sup></h6>
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="5">
-                                <input type="hidden" name="w3ls_item" value="三人套餐">
-                                <input type="hidden" name="amount" value="68.0">
-                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i>加入购物车</button>
-                                <span class="w3-agile-line"> </span>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-4 product-grids">
-                <div class="flip-container">
-                    <div class="flipper agile-products">
-                        <div class="front">
-                            <img src="images\g6.jpg" class="img-responsive" alt="img">
-                            <div class="agile-product-text">
-                                <h5>单人套餐</h5>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <h4>单人套餐</h4>
-                            <p>分量十足的马铃薯球加上可口面包和健康蔬菜</p>
-                            <h6>30.0<sup>￥</sup></h6>
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="6">
-                                <input type="hidden" name="w3ls_item" value="单人套餐">
-                                <input type="hidden" name="amount" value="30.0">
-                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i>加入购物车</button>
-                                <span class="w3-agile-line"> </span>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-4 product-grids">
-                <div class="flip-container">
-                    <div class="flipper agile-products">
-                        <div class="front">
-                            <img src="images\g7.jpg" class="img-responsive" alt="img">
-                            <div class="agile-product-text">
-                                <h5>休闲下午茶</h5>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <h4>休闲下午茶</h4>
-                            <p>咖啡甜点和美味汉堡让工作之余的你享受舒适时光</p>
-                            <h6>24.0<sup>￥</sup></h6>
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="7">
-                                <input type="hidden" name="w3ls_item" value="休闲下午茶">
-                                <input type="hidden" name="amount" value="24.0">
-                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i>加入购物车</button>
-                                <span class="w3-agile-line"> </span>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-4 product-grids">
-                <div class="flip-container">
-                    <div class="flipper agile-products">
-                        <div class="front">
-                            <img src="images\g8.jpg" class="img-responsive" alt="img">
-                            <div class="agile-product-text">
-                                <h5>双人营养套餐</h5>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <h4>双人营养套餐</h4>
-                            <p>绿色蔬菜沙拉美味浓汤丰富主食,营养好滋味</p>
-                            <h6>36.0<sup>￥</sup></h6>
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="8">
-                                <input type="hidden" name="w3ls_item" value="双人营养套餐">
-                                <input type="hidden" name="amount" value="36.0">
-                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i>加入购物车</button>
-                                <span class="w3-agile-line"> </span>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-4 product-grids">
-                <div class="flip-container">
-                    <div class="flipper agile-products">
-                        <div class="front">
-                            <img src="images\g9.jpg" class="img-responsive" alt="img">
-                            <div class="agile-product-text">
-                                <h5>单人肉食套餐</h5>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <h4>单人肉食套餐</h4>
-                            <p>大号马铃薯球加上美味鸡肉,享受吃肉的快感‘</p>
-                            <h6>36.0<sup>￥</sup></h6>
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="9">
-                                <input type="hidden" name="w3ls_item" value="单人肉食套餐">
-                                <input type="hidden" name="amount" value="36.0">
-                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i>加入购物车</button>
-                                <span class="w3-agile-line"> </span>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-4 product-grids">
-                <div class="flip-container">
-                    <div class="flipper agile-products">
-                        <div class="front">
-                            <img src="images\cola.jpg" class="img-responsive" alt="img">
-                            <div class="agile-product-text">
-                                <h5>可口可乐</h5>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <h4>可口可乐</h4>
-                            <p>可口可乐</p>
-                            <h6>5.0<sup>￥</sup></h6>
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="10">
-                                <input type="hidden" name="w3ls_item" value="可口可乐">
-                                <input type="hidden" name="amount" value="5.0">
-                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i>加入购物车</button>
-                                <span class="w3-agile-line"> </span>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-4 product-grids">
-                <div class="flip-container">
-                    <div class="flipper agile-products">
-                        <div class="front">
-                            <img src="images\coffce.jpg" class="img-responsive" alt="img">
-                            <div class="agile-product-text">
-                                <h5>卡布奇诺</h5>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <h4>卡布奇诺</h4>
-                            <p>奶香十足美味醇厚</p>
-                            <h6>16.0<sup>￥</sup></h6>
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="11">
-                                <input type="hidden" name="w3ls_item" value="卡布奇诺">
-                                <input type="hidden" name="amount" value="16.0">
-                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i>加入购物车</button>
-                                <span class="w3-agile-line"> </span>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-4 product-grids">
-                <div class="flip-container">
-                    <div class="flipper agile-products">
-                        <div class="front">
-                            <img src="images\g11.jpg" class="img-responsive" alt="img">
-                            <div class="agile-product-text">
-                                <h5>金桔柠檬</h5>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <h4>金桔柠檬</h4>
-                            <p>金桔柠檬茶顾名思义就是金桔与柠檬一起冲泡的茶</p>
-                            <h6>12.0<sup>￥</sup></h6>
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="12">
-                                <input type="hidden" name="w3ls_item" value="金桔柠檬">
-                                <input type="hidden" name="amount" value="12.0">
-                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i>加入购物车</button>
-                                <span class="w3-agile-line"> </span>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-4 product-grids">
-                <div class="flip-container">
-                    <div class="flipper agile-products">
-                        <div class="front">
-                            <img src="images\g10.jpg" class="img-responsive" alt="img">
-                            <div class="agile-product-text">
-                                <h5>可乐鸡翅</h5>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <h4>可乐鸡翅</h4>
-                            <p>可乐红烧鸡翅</p>
-                            <h6>24.0<sup>￥</sup></h6>
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="13">
-                                <input type="hidden" name="w3ls_item" value="可乐鸡翅">
-                                <input type="hidden" name="amount" value="24.0">
-                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i>加入购物车</button>
-                                <span class="w3-agile-line"> </span>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-    </div>
-    <div class="clearfix"> </div>
-</div>
-<!--主体结束-->
-<div class="clearHeight"></div>
-<div class="footer">
-
-    <div>
-        <a href="#staplesbmincart">
-            <i class="iconfont">&#xe68a;</i>
-            <p>订单</p>
-        </a>
-    </div>
-
-</div>
+        <div class="aui-title">商品</div>
+        <div class="aui-pull-right"></div>
+    </header>
+	<div class="aui-tab" id="tab">
+	    <div class="aui-tab-item aui-active">点菜</div>
+	</div>
+	<div class="main">
+		<div class="aui-item" id="tab1-con1">
+			<div class="left-menu" id="left">
+				<ul>
+					<li class="active"><span>主食</span></li>
+					<li><span>小吃</span></li>
+					<li><span>饮品</span></li>
+					<li><span>套餐</span></li>
+				</ul>
+			</div>
+			<div class="con">
+				<div class="right-con con-active">
+					<ul>
+						<li>
+							<div class="menu-img"><img src="../static/web/images/鸡肉堡.jpg" width="55" height="55" /></div>
+							<div class="menu-txt">
+								<h4>鸡肉堡</h4>
+								<p class="list1">余量:123</p>
+								<p class="list2">
+									<b>￥6</b>
+								<div class="btn">
+									<button class="minus">
+										<strong></strong>
+									</button>
+									<i>0</i>
+									<button class="add">
+										<strong></strong>
+									</button>
+									<i class="price">6</i>
+								</div>
+								</p>
+							</div>
+						</li>
+						<li>
+							<div class="menu-img"><img src="../static/web/images/双层牛肉堡.jpg" width="55" height="55" /></div>
+							<div class="menu-txt">
+								<h4>双层牛肉堡</h4>
+								<p class="list1">余量:45</p>
+								<p class="list2">
+									<b>特价：￥10</b>
+								<div class="btn">
+									<button class="minus">
+										<strong></strong>
+									</button>
+									<i>0</i>
+									<button class="add">
+										<strong></strong>
+									</button>
+									<i class="price">10</i>
+								</div>
+								</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="right-con">
+					<ul>
+						<li>
+							<div class="menu-img"><img src="../static/web/images/大薯条.jpg" width="55" height="55" /></div>
+							<div class="menu-txt">
+								<h4>大薯条</h4>
+								<p class="list1">余量:123</p>
+								<p class="list2">
+									<b>￥6</b>
+								<div class="btn">
+									<button class="minus">
+										<strong></strong>
+									</button>
+									<i>0</i>
+									<button class="add">
+										<strong></strong>
+									</button>
+									<i class="price">6</i>
+								</div>
+								</p>
+							</div>
+						</li>
+						<li>
+							<div class="menu-img"><img src="../static/web/images/小薯条.jpg" width="55" height="55" /></div>
+							<div class="menu-txt">
+								<h4>小薯条</h4>
+								<p class="list1">余量:321</p>
+								<p class="list2">
+									<b>￥2</b>
+								<div class="btn">
+									<button class="minus">
+										<strong></strong>
+									</button>
+									<i>0</i>
+									<button class="add">
+										<strong></strong>
+									</button>
+									<i class="price">2</i>
+								</div>
+								</p>
+							</div>
+						</li>
+						<li>
+							<div class="menu-img"><img src="../static/web/images/劲爆鸡米花.jpg" width="55" height="55" /></div>
+							<div class="menu-txt">
+								<h4>劲爆鸡米花</h4>
+								<p class="list1">余量:41</p>
+								<p class="list2">
+									<b>特价:￥4</b>
+								<div class="btn">
+									<button class="minus">
+										<strong></strong>
+									</button>
+									<i>0</i>
+									<button class="add">
+										<strong></strong>
+									</button>
+									<i class="price">4</i>
+								</div>
+								</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="right-con">
+					<ul>
+						<li>
+							<div class="menu-img"><img src="../static/web/images/可乐.jpg" width="55" height="55" /></div>
+							<div class="menu-txt">
+								<h4>可乐</h4>
+								<p class="list1">余量:114514</p>
+								<p class="list2">
+									<b>￥3</b>
+								<div class="btn">
+									<button class="minus">
+										<strong></strong>
+									</button>
+									<i>0</i>
+									<button class="add">
+										<strong></strong>
+									</button>
+									<i class="price">3</i>
+								</div>
+								</p>
+							</div>
+						</li>
+						<li>
+							<div class="menu-img"><img src="../static/web/images/咖啡.jpg" width="55" height="55" /></div>
+							<div class="menu-txt">
+								<h4>咖啡</h4>
+								<p class="list1">余量:214</p>
+								<p class="list2">
+									<b>￥5</b>
+								<div class="btn">
+									<button class="minus">
+										<strong></strong>
+									</button>
+									<i>0</i>
+									<button class="add">
+										<strong></strong>
+									</button>
+									<i class="price">5</i>
+								</div>
+								</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="right-con">
+					<ul>
+						<li>
+							<div class="menu-img"><img src="../static/web/images/超值套餐.jpg" width="55" height="55" /></div>
+							<div class="menu-txt">
+								<h4>超值套餐</h4>
+								<p class="list1">余量:60</p>
+								<p class="list2">
+									<b>特价:￥13</b>
+								<div class="btn">
+									<button class="minus">
+										<strong></strong>
+									</button>
+									<i>0</i>
+									<button class="add">
+										<strong></strong>
+									</button>
+									<i class="price">13</i>
+								</div>
+								</p>
+							</div>
+						</li>
+						<li>
+							<div class="menu-img"><img src="../static/web/images/鸡肉卷套餐.jpeg" width="55" height="55" /></div>
+							<div class="menu-txt">
+								<h4>鸡肉卷套餐</h4>
+								<p class="list1">余量:98</p>
+								<p class="list2">
+									<b>￥10</b>
+								<div class="btn">
+									<button class="minus">
+										<strong></strong>
+									</button>
+									<i>0</i>
+									<button class="add">
+										<strong></strong>
+									</button>
+									<i class="price">10</i>
+								</div>
+								</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="up1"></div>
+			<div class="shopcart-list fold-transition">
+				<div class="list-header">
+					<h1 class="title">购物车</h1>
+					<span class="empty">清空所有</span>
+				</div>
+				<div class="list-content">
+					<ul></ul>
+				</div>
+			</div>
+			<div class="footer">
+				<div class="left">
+					<div class="count_num"><span id="totalcountshow">0</span></div>
+					<span id="cartN" class="nowrap">总计：<span id="totalpriceshow">0</span>元</span>
+				</div>
+				<div class="right">
+					<a id="btnselect" class="xhlbtn disable">去结算</a>
+				</div>
+			</div>
+		</div>
+	    <div class="aui-item aui-hide" id="tab1-con2">
+	        2
+	    </div>
+	</div>
 
 
-<!-- cart-js -->
-<script src="../static/web/js/minicart.js"></script>
-<script>
-    w3ls.render();
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../static/web/js/add.js"></script>
+<script type="text/javascript" src="../static/web/js/aui-tab.js" ></script>
+<script type="text/javascript">
+    apiready = function() {
+        api.parseTapmode();
+    }
+    let tab = new auiTab({
+        element: document.getElementById("tab"),
 
-    w3ls.cart.on('w3sb_checkout', function (evt) {
-        var items, len, i;
-
-        if (this.subtotal() > 0) {
-            items = this.items();
-
-            for (i = 0, len = items.length; i < len; i++) {
+    }, function(ret) {
+        if (ret) {
+            //定义获取对象的所有兄弟节点的函数，
+            function siblings(elm) {
+                let a = [];
+                let p = elm.parentNode.children;
+                for (let i = 0, pl = p.length; i < pl; i++) {
+                    if (p[i] !== elm) a.push(p[i]);
+                }
+                return a;
+            }
+            let index = ret.index;
+            let activeC = document.getElementById("tab1-con" + index);
+            activeC.className = "";
+            for (let i = 0; i < siblings(activeC).length; i++) {
+                siblings(activeC)[i].className = "aui-hide";
             }
         }
     });
 </script>
-<!-- //cart-js -->
-<!-- Owl-Carousel-JavaScript -->
-<script src="../static/web/js/owl.carousel.js"></script>
-<script>
-    $(document).ready(function() {
-        $("#owl-demo").owlCarousel ({
-            items : 3,
-            lazyLoad : true,
-            autoPlay : true,
-            pagination : true,
-        });
-    });
-</script>
-<!-- //Owl-Carousel-JavaScript -->
-<!-- the jScrollPane script -->
-<script type="text/javascript" src="../static/web/js/jquery.jscrollpane.min.js"></script>
-<script type="text/javascript" id="sourcecode">
-    $(function()
-    {
-        $('.scroll-pane').jScrollPane();
-    });
-</script>
-<!-- //the jScrollPane script -->
-<script type="text/javascript" src="../static/web/js/jquery.mousewheel.js"></script> <!-- the mouse wheel plugin -->
-<!-- start-smooth-scrolling -->
-<script src="../static/web/js/SmoothScroll.min.js"></script>
-<script type="text/javascript" src="../static/web/js/move-top.js"></script>
-<script type="text/javascript" src="../static/web/js/easing.js"></script>
-<script type="text/javascript">
-    jQuery(document).ready(function($) {
-        $(".scroll").click(function(event){
-            event.preventDefault();
-
-            $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-        });
-    });
-</script>
-<!-- //end-smooth-scrolling -->
-<!-- smooth-scrolling-of-move-up -->
-<script type="text/javascript">
-    $(document).ready(function() {
-        /*
-        var defaults = {
-            containerID: 'toTop', // fading element id
-            containerHoverID: 'toTopHover', // fading element hover id
-            scrollSpeed: 1200,
-            easingType: 'linear'
-        };
-        */
-
-        $().UItoTop({ easingType: 'easeOutQuart' });
-
-    });
-</script>
-<!-- //smooth-scrolling-of-move-up -->
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="../static/web/js/bootstrap.js"></script>
 </body>
 </html>
