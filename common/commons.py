@@ -1,6 +1,6 @@
 import json
 import os
-from datetime import datetime
+import datetime
 from datetime import timedelta
 
 
@@ -53,12 +53,12 @@ def get_dates(start_date, end_date):
     :return: 时间段内每一天的日期列表
     """
     date_list = []
-    start_date = datetime.strptime(start_date, "%Y-%m-%d")
-    end_date = datetime.strptime(end_date, "%Y-%m-%d")
-    while start_date <= end_date:
-        date_str = start_date.strptime("%Y-%m-%d")
+    start = datetime.datetime.strptime(start_date, "%Y-%m-%d")
+    end = datetime.datetime.strptime(end_date, "%Y-%m-%d")
+    while start <= end:
+        date_str = start.strftime("%Y-%m-%d")
         date_list.append(date_str)
-        start_date += timedelta(days=1)
+        start += timedelta(days=1)
     return date_list
 
 

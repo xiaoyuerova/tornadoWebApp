@@ -17,33 +17,6 @@ from sqlalchemy import (
 )
 
 
-class BaseHandler(tornado.web.RequestHandler, ABC):
-    def __init__(self, *argc, **argkw):
-        super(BaseHandler, self).__init__(*argc, **argkw)
-
-    # 解决跨域问题
-    def set_default_headers(self):
-        self.set_header("Access-Control-Allow-Origin", "*")  # 这个地方可以写域名
-        self.set_header("Access-Control-Allow-Headers", "x-requested-with")
-        self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
-        self.set_header("Access-Control-Max-Age", 1000)
-        self.set_header("Content-type", "application/json")
-
-    def get(self):
-        self.write('request get')
-
-    def post(self):
-        self.write('request post')
-
-    # vue一般需要访问options方法， 如果报错则很难继续，所以只要通过就行了，当然需要其他逻辑就自己控制。
-    def options(self):
-        # 返回方法1
-        self.set_status(204)
-        self.finish()
-        # 返回方法2
-        # self.write('{"errorCode":"00","errorMessage","success"}')
-
-
 class Customers(BaseDB):
     # table for customers
     __tablename__ = "customers"
@@ -60,6 +33,7 @@ class Customers(BaseDB):
         self.tableId = tableId
         self.date = datetime.now().date()
         self.time = datetime.now().time()
+        self.identify = 0
         self.settlement = False
 
     def to_dict(self):
@@ -76,7 +50,7 @@ class Dishes(BaseDB):
     description = Column(String(200), nullable=True)
     picture = Column(String(400), nullable=True)
     price = Column(Float, nullable=False)
-    specialPrice = Column(Float, nullable=True)
+    specialPrice = Column(Boolean, nullable=True)           # false:非特价；true:特价
     quantity = Column(Integer, nullable=True)
 
     def __init__(self, style, name, price):
@@ -96,9 +70,9 @@ class Chooses(BaseDB):
     customerId = Column(Integer, ForeignKey("customers.id"), nullable=False)
     orderIds = Column(String(100), nullable=False)
 
-    def __init__(self, customerId, oderIds):
-        self.customerId = customerId
-        self.orderIds = oderIds
+    def __init__(self, customer_id, order_ids):
+        self.customerId = customer_id
+        self.orderIds = order_ids
 
     def to_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -123,6 +97,7 @@ class Orders(BaseDB):
         self.dishes = dishes
         self.date = datetime.now().date()
         self.time = datetime.now().time()
+        self.discount = 0
         self.state = 0
 
     def to_dict(self):
@@ -169,7 +144,6 @@ class Cashiers(BaseDB):
     def __init__(self, name, pwd):
         self.name = name
         self.password = pwd
-        self.id += 100
 
 
 class CompleteSettlement(BaseDB):

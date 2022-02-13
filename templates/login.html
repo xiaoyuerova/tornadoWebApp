@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>点餐系统登陆页面</title>
-    <script type="text/javascript" src='{{ static_url("web/js/vue.js") }}'></script>
+    <!--    <script type="text/javascript" src='{{ static_url("web/js/vue.js") }}'></script>-->
     <!--    <script type="text/javascript" src='{{ static_url("web/js/axios.js") }}'></script>-->
     <!--        <link rel="stylesheet" href='{{ static_url("web/lib/elementUi/index.css") }}'>-->
     <!--        <script src='{{ static_url("web/lib/elementUi/index.js") }}'></script>-->
-    <!--    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script type="text/javascript" src="../static/web/js/vue-router.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
@@ -63,9 +64,13 @@
                 params.append('userType', this.form.userType)
                 params.append('name', this.form.userName)
                 params.append('password', this.form.password)
+
+                // this.$router.push({path:'http://127.0.0.1:8000/login/login', query:params})
                 this.$http.post('http://127.0.0.1:8000/login/login', params)
                     .then(function (response) {
                             const data = response.data.data
+                            if (response.status === 200 && (!data))
+                                return
                             if (data.code !== "0") {
                                 alert(data.msg)
                             }

@@ -16,11 +16,11 @@ from conf.base import (
     ERROR_CODE,
 )
 from common.models import (
-    BaseHandler,
     Managers,
     Cashiers,
     CateringStaffs
 )
+from conf.BaseHandler import BaseHandler
 
 # Configure logging,生成日志文件
 logFilePath = "log/login/login.log"  # 日志保存地址
@@ -39,7 +39,7 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 
-class RegisterHandler(tornado.web.RequestHandler):
+class RegisterHandler(BaseHandler):
     """
     handle /login/register request
     """
@@ -62,9 +62,7 @@ class RegisterHandler(tornado.web.RequestHandler):
                 ex_manager = Managers(name, password)
                 self.db.add(ex_manager)
                 self.db.commit()
-                http_response(self, ERROR_CODE['1006'], '1006')
-                sleep(2)
-                self.redirect("login.html")
+                http_response(self, ERROR_CODE['0'], '0')
 
         except Exception as e:
             self.db.rollback()
@@ -83,9 +81,7 @@ class RegisterHandler(tornado.web.RequestHandler):
                 ex_catering = CateringStaffs(name, password)
                 self.db.add(ex_catering)
                 self.db.commit()
-                http_response(self, ERROR_CODE['1006'], '1006')
-                sleep(2)
-                self.redirect('login.html')
+                http_response(self, ERROR_CODE['0'], '0')
 
         except Exception as e:
             self.db.rollback()
@@ -104,9 +100,7 @@ class RegisterHandler(tornado.web.RequestHandler):
                 ex_cashier = Cashiers(name, password)
                 self.db.add(ex_cashier)
                 self.db.commit()
-                http_response(self, ERROR_CODE['1006'], '1006')
-                sleep(2)
-                self.redirect('login.html')
+                http_response(self, ERROR_CODE['0'], '0')
 
         except Exception as e:
             self.db.rollback()
@@ -136,13 +130,12 @@ class RegisterHandler(tornado.web.RequestHandler):
             password = self.get_argument('password')
 
             try:
-                if len(name) < 6 | len(name) > 10:
+                if len(name) < 6 or len(name) > 10:
                     http_response(self, ERROR_CODE['1007'], '1007')
-                    return
-                if len(password) < 6 | len(password) > 12:
+                elif len(password) < 6 or len(password) > 12:
                     http_response(self, ERROR_CODE['1008'], '1008')
-                    return
-                self.switch.get(get_key(user_type))(self, name, password)
+                else:
+                    self.switch.get(get_key(user_type))(self, name, password)
 
             except Exception as e:
                 self.db.rollback()
@@ -168,7 +161,7 @@ def get_key(user_type):
         return 'default'
 
 
-class LoginHandler(tornado.web.RequestHandler):
+class LoginHandler(BaseHandler):
     """
     handle /login/login request
     """
@@ -188,20 +181,17 @@ class LoginHandler(tornado.web.RequestHandler):
             return
         if manager.password == password:
             http_response(self, ERROR_CODE['0'], '0')
-            self.redirect("managerIndex.html")
         else:
             http_response(self, ERROR_CODE['1002'], '1002')
 
     # 配餐员登录
     def case1(self, name, password):
-        print(name)
         catering_staff = self.db.query(CateringStaffs).filter(CateringStaffs.name == name).first()
         if not catering_staff:
             http_response(self, ERROR_CODE['1003'], '1003')
             return
         if catering_staff.password == password:
             http_response(self, ERROR_CODE['0'], '0')
-            self.redirect("cateringStaffs.html")
         else:
             http_response(self, ERROR_CODE['1002'], '1002')
 
@@ -213,7 +203,6 @@ class LoginHandler(tornado.web.RequestHandler):
             return
         if cashier.password == password:
             http_response(self, ERROR_CODE['0'], '0')
-            self.redirect("cashiers.html")
         else:
             http_response(self, ERROR_CODE['1002'], '1002')
 
@@ -228,7 +217,8 @@ class LoginHandler(tornado.web.RequestHandler):
     }
 
     def get(self):
-        self.render("login.html")
+        return self.write("response get")
+        # self.render("login.html")
 
     def post(self, *args, **kwargs):
         try:
@@ -238,14 +228,14 @@ class LoginHandler(tornado.web.RequestHandler):
             password = self.get_argument('password')
 
             try:
-                if len(name) < 6 | len(name) > 10:
+                if len(name) < 6 or len(name) > 10:
                     http_response(self, ERROR_CODE['1007'], '1007')
-                    return
-                if len(password) < 6 | len(password) > 12:
+                elif len(password) < 6 or len(password) > 12:
                     http_response(self, ERROR_CODE['1008'], '1008')
-                    return
-                # 验证登录
-                self.switch.get(get_key(user_type))(self, name, password)
+                else:
+                    # 验证登录
+                    self.switch.get(get_key(user_type))(self, name, password)
+
             except Exception as e:
                 self.db.rollback()
                 http_response(self, f"ERROR： {e}", '')

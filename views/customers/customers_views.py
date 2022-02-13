@@ -15,6 +15,7 @@ from common.commons import (
 from conf.base import (
     ERROR_CODE,
 )
+from conf.BaseHandler import BaseHandler
 from common.models import (
     Customers,
     Orders,
@@ -39,7 +40,7 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 
-class LoginHandle(tornado.web.RequestHandler):
+class LoginHandle(BaseHandler):
     """
         handle /customers/login request
         :param tableId: 顾客通过扫码识别到的桌号
@@ -63,9 +64,6 @@ class LoginHandle(tornado.web.RequestHandler):
         return 0
 
     def get(self):
-        pass
-
-    def post(self):
         try:
             # 获取⼊参
             table_id = self.get_argument('tableId')
@@ -80,9 +78,9 @@ class LoginHandle(tornado.web.RequestHandler):
 
                 # 返回顾客id
                 data = {"customerId": self.customers_id}
+                print(data.values())
                 http_response(self, data, '0')
-                self.render('orderIndex.html')
-                print('customer login successful')
+                # self.render('customerIndex.html')
 
             except Exception as e:
                 self.db.rollback()
@@ -94,6 +92,9 @@ class LoginHandle(tornado.web.RequestHandler):
             # 获取⼊参失败时，抛出错误码及错误信息
             http_response(self, ERROR_CODE['2001'], '2001')
             print(f"ERROR： {e}")
+
+    def post(self):
+        pass
 
 
 def set_two_num(num):
@@ -127,7 +128,7 @@ def get_id(customer_id):
     return order_id
 
 
-class SubmitHandle(tornado.web.RequestHandler):
+class SubmitHandle(BaseHandler):
     """
     handle /customers/submit request
     :param customer_id: 顾客编号
@@ -153,19 +154,40 @@ class SubmitHandle(tornado.web.RequestHandler):
 
             try:
                 customer_id = eval(customer_id)
-                dishes = eval(dishes)
                 order_id = get_id(customer_id)
                 order = Orders(order_id, customer_id, dishes)
                 # 计算总价
+                order.discount = 0
                 total_price = 0
+                dishes = eval(dishes)
                 for dishes_id in dishes:
                     ex_d = self.db.query(Dishes).filter(Dishes.id == dishes_id).first()
-                    total_price += ex_d.price
+                    if ex_d:
+                        total_price += ex_d.price
+                    else:
+                        print('dishes_id:不存在！')
                 order.totalPrice = total_price
                 self.db.add(order)
-                self.db.commit()
+                # choose表
+                ex_c = self.db.query(Chooses).filter(Chooses.customerId == customer_id).first()
+                if ex_c:
+                    # self.db.delete(ex_c)
+                    # self.db.commit()
+                    order_list = eval(ex_c.orderIds)
+                    order_list.append(order.id)
+                    if order_list:
+                        self.db.query(Chooses).filter(Chooses.id == ex_c.id).update({Chooses.orderIds: str(order_list)})
+                        self.db.commit()
+                    else:
+                        print('order_list 不存在')
+                else:
+                    order_ids = [order.id]
+                    choose = Chooses(customer_id, str(order_ids))
+                    self.db.add(choose)
+                    self.db.commit()
+                data = {"orderId": order.id}
                 # 返回订单编号
-                http_response(self, order.id, '0')
+                http_response(self, data, '0')
 
             except Exception as e:
                 self.db.rollback()
@@ -179,7 +201,7 @@ class SubmitHandle(tornado.web.RequestHandler):
             print(f"ERROR： {e}")
 
 
-class OrdersHandler(tornado.web.RequestHandler):
+class OrdersHandler(BaseHandler):
     """
     顾客更新订单状态
     handle /customers/orders request

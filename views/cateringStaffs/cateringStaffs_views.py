@@ -17,6 +17,7 @@ from common.commons import (
 from conf.base import (
     ERROR_CODE,
 )
+from conf.BaseHandler import BaseHandler
 from common.models import (
     Customers,
     Chooses,
@@ -41,7 +42,7 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 
-class OrderHandle(tornado.web.RequestHandler):
+class OrderHandle(BaseHandler):
     """
     handle /cateringStaffs/order request
     response:
@@ -65,10 +66,24 @@ class OrderHandle(tornado.web.RequestHandler):
             chooses = []
             orders = []
             for customer in customers:
+                customer.date = str(customer.date)
+                customer.time = str(customer.time)
+                customer.phoneNumber = ''
+                customer.identify = 0
                 choose = self.db.query(Chooses).filter(Chooses.customerId == customer.id).first()
-                chooses.append(choose)
-                for orderId in eval(choose.orderIds):
-                    orders.append(self.db.query(Orders).filter(Orders.id == orderId).first())
+                if choose:
+                    chooses.append(choose)
+                    for orderId in eval(choose.orderIds):
+                        ex_o = self.db.query(Orders).filter(Orders.id == orderId).first()
+                        if ex_o:
+                            ex_o.date = str(ex_o.date)
+                            ex_o.time = str(ex_o.time)
+                            ex_o.discount = 0
+                            if ex_o.state == 2 or ex_o.state == 3:
+                                continue
+                            orders.append(ex_o)
+                else:
+                    print('choose:不存在！')
             data = {
                 "customers": str(list_to_dict(customers)),
                 "choose": str(list_to_dict(chooses)),
@@ -89,7 +104,7 @@ class OrderHandle(tornado.web.RequestHandler):
         pass
 
 
-class OperateHandler(tornado.web.RequestHandler):
+class OperateHandler(BaseHandler):
     """
     handle /cateringStaffs/operate request
     """
@@ -112,7 +127,7 @@ class OperateHandler(tornado.web.RequestHandler):
 
             try:
                 # 0：已提交；1：正在配餐；2：已出餐；3：已结算
-                self.db.query(Orders).filter(Orders.id == order_id).uptate({Orders.state: 1})
+                self.db.query(Orders).filter(Orders.id == order_id).update({Orders.state: 1})
                 self.db.commit()
                 http_response(self, ERROR_CODE['0'], '0')
 
@@ -129,7 +144,7 @@ class OperateHandler(tornado.web.RequestHandler):
             print(f"ERROR： {e}")
 
 
-class CompleteHandler(tornado.web.RequestHandler):
+class CompleteHandler(BaseHandler):
     """
     handle /cateringStaffs/complete request
     """
@@ -152,7 +167,7 @@ class CompleteHandler(tornado.web.RequestHandler):
 
             try:
                 # 0：已提交；1：正在配餐；2：已出餐；3：已结算
-                self.db.query(Orders).filter(Orders.id == order_id).uptate({Orders.state: 2})
+                self.db.query(Orders).filter(Orders.id == order_id).update({Orders.state: 2})
                 self.db.commit()
                 http_response(self, ERROR_CODE['0'], '0')
 

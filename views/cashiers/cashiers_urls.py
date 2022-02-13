@@ -1,10 +1,10 @@
 from __future__ import unicode_literals
 from .cashiers_views import (
-    OrdersHandler,
+    OrderHandle,
     SettlementHandler
 )
 
 urls = [
-    (r'show', OrdersHandler),
+    (r'order', OrderHandle),
     (r'settlement', SettlementHandler)
 ]
